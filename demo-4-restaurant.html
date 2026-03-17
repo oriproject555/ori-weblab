@@ -82,13 +82,86 @@
     .accent-line { width: 48px; height: 2px; background: linear-gradient(to left, var(--accent2), transparent); margin-bottom: 3rem; }
 
     #menu { padding: 7rem 0; }
-    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-    .menu-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem 1.6rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
-    .menu-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200,103,58,0.12); }
-    .menu-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .menu-name { font-family: 'Frank Ruhl Libre', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .menu-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-    .menu-price { font-size: 1rem; font-weight: 700; color: var(--accent2); }
+    .menu-book {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3.5rem 4rem;
+      max-width: 820px;
+      margin: 0 auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    }
+    .menu-category { margin-bottom: 2.5rem; }
+    .menu-category:last-of-type { margin-bottom: 0; }
+    .menu-category-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .menu-category-header::before,
+    .menu-category-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .menu-category-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+    .menu-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(200,103,58,0.07);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-info { flex: 1; min-width: 0; }
+    .menu-item-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .menu-item-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .menu-item-dots {
+      flex-shrink: 0;
+      width: 80px;
+      border-bottom: 2px dotted rgba(200,103,58,0.22);
+      margin-bottom: 5px;
+    }
+    .menu-item-price {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent2);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .menu-separator {
+      text-align: center;
+      color: var(--accent);
+      opacity: 0.35;
+      letter-spacing: 0.6em;
+      font-size: 0.7rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 600px) {
+      .menu-book { padding: 2rem 1.5rem; }
+      .menu-item-dots { width: 30px; }
+    }
 
     #about { padding: 7rem 0; background: var(--surface); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -216,43 +289,105 @@
       <p class="section-sub">כל מנה מוכנה בידיים מחומרי גלם טריים שנבחרו בקפידה מספקים מקומיים.</p>
       <div class="accent-line"></div>
     </div>
-    <div class="menu-grid">
-      <div class="menu-card reveal">
-        <div class="menu-icon">🥗</div>
-        <div class="menu-name">סלט פתיחה ים-תיכוני</div>
-        <div class="menu-desc">עלים טריים, זיתים ים-תיכוניים, גבינת פטה יוונית, שמן זית כתית ראשונה</div>
-        <div class="menu-price">₪48</div>
+    <div class="menu-book reveal">
+
+      <!-- מנות פתיחה -->
+      <div class="menu-category">
+        <div class="menu-category-header">
+          <span class="menu-category-title">מנות פתיחה</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">סלט פתיחה ים-תיכוני</div>
+            <div class="menu-item-desc">עלים טריים, זיתים, גבינת פטה יוונית, שמן זית כתית ראשונה</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪48</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">לחם פיתה עם ממרחים</div>
+            <div class="menu-item-desc">חומוס ביתי, בבגנוש קלוי, לבנה עם זעתר, שמן זית ופלפל</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪52</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">מרק עגבניות שרי</div>
+            <div class="menu-item-desc">עגבניות שרי קלויות, שמנת, ריחן טרי וגרויירה מגוררת</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪42</div>
+        </div>
       </div>
-      <div class="menu-card reveal">
-        <div class="menu-icon">🍞</div>
-        <div class="menu-name">לחם פיתה עם ממרחים</div>
-        <div class="menu-desc">חומוס ביתי, בבגנוש קלוי, לבנה עם זעתר, שמן זית ופלפל</div>
-        <div class="menu-price">₪52</div>
+
+      <div class="menu-separator">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+      <!-- מנות עיקריות -->
+      <div class="menu-category">
+        <div class="menu-category-header">
+          <span class="menu-category-title">מנות עיקריות</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">פילה דג ים טרי</div>
+            <div class="menu-item-desc">דג לוקוס טרי על גריל פחמים, לימון, צלפים ועשבי תיבול</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪128</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">אנטריקוט על הגריל</div>
+            <div class="menu-item-desc">300 גרם בשר בקר מובחר, ציר בשר, עשבי תיבול ותוספת לבחירה</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪165</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">פסטה ים-תיכונית</div>
+            <div class="menu-item-desc">פסטה טרייה, שרימפס, עגבניות שרי, שמן זית, שום ופטרוזיליה</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪98</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">ריזוטו פטריות יער</div>
+            <div class="menu-item-desc">פורצ׳יני, שיטאקי, פורטובלו, יין לבן, פרמז׳ן וטרגון</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪88</div>
+        </div>
       </div>
-      <div class="menu-card reveal">
-        <div class="menu-icon">🐟</div>
-        <div class="menu-name">פילה דג ים טרי</div>
-        <div class="menu-desc">דג לוקוס טרי על גריל פחמים עם לימון, צלפים ועשבי תיבול</div>
-        <div class="menu-price">₪128</div>
+
+      <div class="menu-separator">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+      <!-- קינוחים -->
+      <div class="menu-category">
+        <div class="menu-category-header">
+          <span class="menu-category-title">קינוחים</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">טירמיסו ביתי</div>
+            <div class="menu-item-desc">מתכון איטלקי מסורתי, ביסקוויטי ספוגיאטו, מסקרפונה ואספרסו</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪52</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">פנה קוטה וניל</div>
+            <div class="menu-item-desc">שמנת וניל אפריקאי, קולי פירות יער טריים</div>
+          </div>
+          <div class="menu-item-dots"></div>
+          <div class="menu-item-price">₪48</div>
+        </div>
       </div>
-      <div class="menu-card reveal">
-        <div class="menu-icon">🥩</div>
-        <div class="menu-name">אנטריקוט על הגריל</div>
-        <div class="menu-desc">300 גרם, בשר בקר מובחר עם ציר בשר, עשבי תיבול ותוספת לבחירה</div>
-        <div class="menu-price">₪165</div>
-      </div>
-      <div class="menu-card reveal">
-        <div class="menu-icon">🍝</div>
-        <div class="menu-name">פסטה ים-תיכונית</div>
-        <div class="menu-desc">פסטה טרייה, שרימפס, עגבניות שרי, שמן זית, שום ופטרוזיליה</div>
-        <div class="menu-price">₪98</div>
-      </div>
-      <div class="menu-card reveal">
-        <div class="menu-icon">🍮</div>
-        <div class="menu-name">טירמיסו ביתי</div>
-        <div class="menu-desc">מתכון איטלקי מסורתי, ביסקוויטי ספוגיאטו, מסקרפונה ואספרסו</div>
-        <div class="menu-price">₪52</div>
-      </div>
+
     </div>
   </div>
 </section>
