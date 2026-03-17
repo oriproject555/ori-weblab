@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מצפה השיער – סלון יוקרה בתל אביב</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0b09;
+      --surface:  #1a1410;
+      --accent:   #b08d5b;
+      --accent2:  #d4af78;
+      --text:     #f2ede6;
+      --muted:    #8a7e72;
+      --border:   rgba(176,141,91,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3 { font-family: 'Frank Ruhl Libre', serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin-inline: auto;
+    }
+
+    /* ── DEMO BANNER ── */
+    .demo-banner {
+      background: #C9A84C;
+      color: #0D0F14;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+    }
+    .demo-banner a {
+      color: #0D0F14;
+      text-decoration: underline;
+      margin-right: 0.5rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 38px; right: 0; left: 0;
+      z-index: 100;
+      padding: 1.2rem 0;
+      background: rgba(14,11,9,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-btn {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.55rem 1.4rem;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .nav-btn:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 60% 50%, rgba(176,141,91,0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 80% at 10% 80%, rgba(176,141,91,0.05) 0%, transparent 60%);
+    }
+
+    /* Decorative scissors SVG */
+    .hero-deco {
+      position: absolute;
+      left: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.07;
+      width: 320px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent2);
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      font-family: 'Heebo', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      box-shadow: 0 0 24px rgba(176,141,91,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: rgba(242,237,230,0.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-number {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 7rem 0;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+    .gold-line {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(to left, var(--accent2), transparent);
+      margin-bottom: 3rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.6rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(176,141,91,0.12);
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(176,141,91,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+    .service-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .service-price {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 7rem 0;
+      background: var(--surface);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-box {
+      aspect-ratio: 3/4;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #2a1f14 0%, #1a1208 100%);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      overflow: hidden;
+    }
+    .about-box-inner {
+      text-align: center;
+      padding: 2rem;
+    }
+    .about-svg {
+      width: 80px;
+      opacity: 0.35;
+      margin-bottom: 1rem;
+    }
+    .about-box-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.6rem;
+      color: var(--accent2);
+      margin-bottom: 0.4rem;
+    }
+    .about-box-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      font-weight: 700;
+      font-family: 'Frank Ruhl Libre', serif;
+    }
+    .badge-num { font-size: 2rem; display: block; }
+    .badge-txt { font-size: 0.8rem; font-family: 'Heebo', sans-serif; font-weight: 600; }
+    .about-text h2 { margin-bottom: 0.75rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; line-height: 1.75; }
+    .about-list { margin: 1.5rem 0 2rem; }
+    .about-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .about-list li::before {
+      content: '✦';
+      color: var(--accent2);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      padding: 7rem 0;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .gallery-item:first-child {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+    .gallery-fill {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .gallery-fill-1 { background: linear-gradient(145deg, #2a1c12, #1a1008); }
+    .gallery-fill-2 { background: linear-gradient(145deg, #1e1a14, #130f0a); }
+    .gallery-fill-3 { background: linear-gradient(145deg, #241c10, #14100a); }
+    .gallery-fill-4 { background: linear-gradient(145deg, #2e1e10, #1c1208); }
+    .gallery-fill-5 { background: linear-gradient(145deg, #1c1a16, #100e0c); }
+    .gallery-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(14,11,9,0.9), transparent);
+      padding: 1.5rem 1rem 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .gallery-icon {
+      font-size: 2.5rem;
+      opacity: 0.4;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      padding: 7rem 0;
+      background: var(--surface);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      transition: border-color 0.3s;
+    }
+    .testimonial-card:hover { border-color: var(--accent); }
+    .stars {
+      color: var(--accent2);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .testimonial-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(176,141,91,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent2);
+      flex-shrink: 0;
+    }
+    .author-name { font-weight: 600; font-size: 0.92rem; }
+    .author-role { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── BOOKING ── */
+    #booking {
+      padding: 7rem 0;
+    }
+    .booking-box {
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(176,141,91,0.06) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      text-align: center;
+    }
+    .booking-box h2 { margin-bottom: 1rem; font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+    .booking-box p { color: var(--muted); margin-bottom: 2.5rem; max-width: 460px; margin-inline: auto; }
+    .booking-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 7rem 0;
+      background: var(--surface);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 1rem; }
+    .contact-info p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(176,141,91,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .contact-detail-label { font-size: 0.78rem; color: var(--muted); }
+    .contact-detail-value { font-weight: 500; color: var(--text); }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    input, textarea, select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.92rem;
+      transition: border-color 0.25s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    textarea { min-height: 110px; resize: vertical; }
+    .form-submit {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 8px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080604;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent2); }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--accent2); }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-copy a { color: var(--accent2); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item:first-child { grid-column: 1 / 3; grid-row: auto; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Demo Banner -->
+<div class="demo-banner">
+  🎨 אתר לדוגמא – נבנה על ידי <a href="Ori WebLab – סטודיו לפיתוח אתרים.html">Ori WebLab</a> | רוצה אתר כזה? <a href="Ori WebLab – סטודיו לפיתוח אתרים.html#contact">צור קשר</a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-logo">מצפה <span>השיער</span></div>
+    <div class="nav-links">
+      <a href="#services">שירותים</a>
+      <a href="#about">אודות</a>
+      <a href="#gallery">גלריה</a>
+      <a href="#testimonials">המלצות</a>
+      <a href="#contact">צור קשר</a>
+    </div>
+    <a href="#booking" class="nav-btn">קביעת תור</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-deco" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M80 20 Q100 60 80 100 Q60 140 100 180 Q140 220 100 280" stroke="#b08d5b" stroke-width="3" fill="none"/>
+    <circle cx="100" cy="150" r="60" stroke="#b08d5b" stroke-width="2"/>
+    <path d="M60 50 L140 50 M60 60 L140 60" stroke="#b08d5b" stroke-width="1.5"/>
+  </svg>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">סלון שיער יוקרה • תל אביב</div>
+      <h1 class="hero-title">
+        חווית עיצוב שיער<br>
+        <em>ברמה אחרת לגמרי</em>
+      </h1>
+      <p class="hero-sub">
+        סלון מצפה השיער – שבע שנים של מומחיות בצביעה, תספורות ועיצוב שיער. כי השיער שלך ראוי לטיפול הטוב ביותר.
+      </p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn btn-primary">קבע תור עכשיו ✦</a>
+        <a href="#services" class="btn btn-outline">השירותים שלנו</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-number">1,400+</div>
+          <div class="stat-label">לקוחות מרוצים</div>
+        </div>
+        <div>
+          <div class="stat-number">7</div>
+          <div class="stat-label">שנות ניסיון</div>
+        </div>
+        <div>
+          <div class="stat-number">4.9★</div>
+          <div class="stat-label">דירוג ממוצע</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="container">
+    <span class="section-label">מה אנחנו מציעים</span>
+    <h2 class="section-title">השירותים שלנו</h2>
+    <p class="section-sub">מגוון שלם של שירותי שיער מקצועיים, מותאמים אישית לכל לקוח ולקוחה.</p>
+    <div class="gold-line"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✂️</div>
+        <div class="service-name">תספורת & עיצוב</div>
+        <p class="service-desc">תספורות מקצועיות לנשים וגברים, כולל עיצוב ופן. מותאמת לאנטומיה של הפנים ולסגנון האישי שלך.</p>
+        <div class="service-price">מ-150 ₪</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <div class="service-name">צביעה & הבהרה</div>
+        <p class="service-desc">גוונים, אומברה, בלייאז', צביעה שורשים ועוד. עובדים עם מוצרי פרמיום שמגנים על שיערך.</p>
+        <div class="service-price">מ-280 ₪</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💆</div>
+        <div class="service-name">טיפולי שיער</div>
+        <p class="service-desc">קראטין, פורמלין, מסכות לחות ומזון עמוק. חזרו לשיער חלק, בריא ומבריק.</p>
+        <div class="service-price">מ-350 ₪</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👰</div>
+        <div class="service-name">עיצוב לאירועים</div>
+        <p class="service-desc">תסרוקות לחתונות, בר/בת מצוות ואירועים מיוחדים. נגיע גם אליך הביתה לפי בקשה.</p>
+        <div class="service-price">מ-400 ₪</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-box">
+          <div class="about-box-inner">
+            <svg class="about-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="35" r="28" stroke="#b08d5b" stroke-width="2.5"/>
+              <path d="M22 90 Q50 70 78 90" stroke="#b08d5b" stroke-width="2.5" fill="none"/>
+              <path d="M35 35 Q50 55 65 35" stroke="#b08d5b" stroke-width="2" fill="none"/>
+            </svg>
+            <div class="about-box-title">מיכל כהן</div>
+            <div class="about-box-sub">בעלת הסלון ומעצבת ראשית</div>
+          </div>
+        </div>
+        <div class="about-badge">
+          <span class="badge-num">7+</span>
+          <span class="badge-txt">שנות ניסיון</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-label">הסיפור שלנו</span>
+        <h2 class="section-title">אנחנו לא סתם סלון</h2>
+        <p>מצפה השיער הוקם ב-2017 מתוך אהבה אמיתית לאמנות עיצוב השיער. אנחנו מאמינים שכל לקוח ולקוחה ראויים לטיפול אישי, מקצועי ומותאם בדיוק אליהם.</p>
+        <p>כל תספורת, כל צביעה – היא יצירת אמנות. אנחנו לוקחים את הזמן להקשיב, להבין ולהוציא את הטוב ביותר מהשיער שלך.</p>
+        <ul class="about-list">
+          <li>מוצרי פרמיום – Schwarzkopf, Wella ו-Olaplex בלבד</li>
+          <li>צוות מיומן עם הכשרה בינלאומית</li>
+          <li>אווירה נינוחה ופרטית לחלוטין</li>
+          <li>הגעה עד הבית לאירועים מיוחדים</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">ספרו לי עוד ✦</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <span class="section-label">הגלריה שלנו</span>
+    <h2 class="section-title">עבודות שאנחנו גאים בהן</h2>
+    <p class="section-sub">כל עבודה היא סיפור אחר. הנה טעימה קטנה ממה שאנחנו עושים.</p>
+    <div class="gold-line"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-fill gallery-fill-1">
+          <span class="gallery-icon">💇‍♀️</span>
+        </div>
+        <div class="gallery-label">בלייאז' טבעי</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-fill gallery-fill-2">
+          <span class="gallery-icon">✂️</span>
+        </div>
+        <div class="gallery-label">תספורת BOB</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-fill gallery-fill-3">
+          <span class="gallery-icon">🎨</span>
+        </div>
+        <div class="gallery-label">צביעה אומברה</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-fill gallery-fill-4">
+          <span class="gallery-icon">👸</span>
+        </div>
+        <div class="gallery-label">תסרוקת לחתונה</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-fill gallery-fill-5">
+          <span class="gallery-icon">💫</span>
+        </div>
+        <div class="gallery-label">קראטין & החלקה</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="container">
+    <span class="section-label">מה הלקוחות אומרים</span>
+    <h2 class="section-title">המלצות לקוחות</h2>
+    <p class="section-sub">אנחנו גאים בכל לקוח שיוצא מאיתנו עם חיוך.</p>
+    <div class="gold-line"></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "הגעתי עם שיער פגום ויצאתי עם שיער חדש! מיכל הקשיבה לי, הסבירה כל שלב ועשתה עבודה מדהימה. אני לא הולכת לשום מקום אחר."
+        </p>
+        <div class="testimonial-author">
+          <div class="avatar">ש</div>
+          <div>
+            <div class="author-name">שירה לוי</div>
+            <div class="author-role">לקוחה קבועה מ-2019</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "עשיתי כאן בלייאז' לראשונה בחיים ואני בשוק מהתוצאה. המחיר הוגן, האווירה נעימה והצוות מקצועי להפליא. ממליצה בחום!"
+        </p>
+        <div class="testimonial-author">
+          <div class="avatar">נ</div>
+          <div>
+            <div class="author-name">נועה אברהם</div>
+            <div class="author-role">לקוחה חדשה</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "עיצוב שיער לחתונה של הבת שלי. מיכל הגיעה הביתה, עשתה עבודה מושלמת לכולן. הבת שלי בכתה מאושר כשראתה את עצמה. תודה מכל הלב!"
+        </p>
+        <div class="testimonial-author">
+          <div class="avatar">ר</div>
+          <div>
+            <div class="author-name">רחל ביטון</div>
+            <div class="author-role">אמא של כלה</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Booking CTA -->
+<section id="booking">
+  <div class="container">
+    <div class="booking-box">
+      <span class="section-label">בואו אלינו</span>
+      <h2>מוכנה לשינוי?</h2>
+      <p>קבעי תור עוד היום ותחוו את ההבדל. זמינים גם לאירועים ביתיים.</p>
+      <div class="booking-btns">
+        <a href="tel:050-1234567" class="btn btn-primary">📞 050-123-4567</a>
+        <a href="https://wa.me/972501234567" class="btn btn-outline">WhatsApp ✉</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-label">יצירת קשר</span>
+        <h2 class="section-title">נשמח לשמוע ממך</h2>
+        <p>שלחו לנו הודעה, התקשרו או בואו לבקר. אנחנו כאן בשבילכם.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">כתובת</div>
+            <div class="contact-detail-value">רחוב דיזנגוף 88, תל אביב</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">טלפון</div>
+            <div class="contact-detail-value">050-123-4567</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🕐</div>
+          <div>
+            <div class="contact-detail-label">שעות פעילות</div>
+            <div class="contact-detail-value">א'-ה' 09:00–20:00 | ו' 08:00–15:00</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📧</div>
+          <div>
+            <div class="contact-detail-label">אימייל</div>
+            <div class="contact-detail-value">info@mitzpehair.co.il</div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="return false">
+        <div class="form-row">
+          <input type="text" placeholder="שם מלא">
+          <input type="tel" placeholder="מספר טלפון">
+        </div>
+        <select>
+          <option value="" disabled selected>בחר/י שירות</option>
+          <option>תספורת & עיצוב</option>
+          <option>צביעה & הבהרה</option>
+          <option>טיפולי שיער</option>
+          <option>עיצוב לאירועים</option>
+        </select>
+        <input type="text" placeholder="תאריך ושעה מועדפים">
+        <textarea placeholder="פרטים נוספים (אופציונלי)"></textarea>
+        <button type="submit" class="form-submit">שלח/י בקשת תור ✦</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">מצפה <span>השיער</span></div>
+    <div class="footer-links">
+      <a href="#services">שירותים</a>
+      <a href="#about">אודות</a>
+      <a href="#gallery">גלריה</a>
+      <a href="#contact">צור קשר</a>
+    </div>
+    <p class="footer-copy">
+      © 2024 מצפה השיער. כל הזכויות שמורות. |
+      <a href="Ori WebLab – סטודיו לפיתוח אתרים.html">בניית האתר: Ori WebLab</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

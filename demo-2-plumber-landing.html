@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שרברב אקספרס – אינסטלציה מקצועית 24/7</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0e14;
+      --surface: #111622;
+      --surface2:#161d2e;
+      --accent:  #1a7fd4;
+      --accent2: #3d9de8;
+      --orange:  #e07b1a;
+      --text:    #eef2f7;
+      --muted:   #6e7d92;
+      --border:  rgba(26,127,212,0.2);
+      --green:   #22c55e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3 { font-family: 'Frank Ruhl Libre', serif; line-height: 1.15; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin-inline: auto;
+    }
+
+    /* ── DEMO BANNER ── */
+    .demo-banner {
+      background: #C9A84C;
+      color: #0D0F14;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+    }
+    .demo-banner a {
+      color: #0D0F14;
+      text-decoration: underline;
+      margin-right: 0.5rem;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--accent);
+      padding: 0.5rem 0;
+      position: fixed;
+      top: 38px; left: 0; right: 0;
+      z-index: 200;
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .topbar-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.15);
+      padding: 0.2rem 0.75rem;
+      border-radius: 20px;
+    }
+    .topbar-phone {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 76px; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,14,20,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .nav-logo .accent { color: var(--accent2); }
+    .nav-logo .orange { color: var(--orange); }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+    .nav-links a {
+      font-size: 0.87rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .emergency-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--orange);
+      color: white;
+      padding: 0.55rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: background 0.25s, transform 0.25s;
+      animation: pulse-orange 2s infinite;
+    }
+    .emergency-btn:hover { background: #f08c30; transform: translateY(-1px); }
+
+    @keyframes pulse-orange {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(224,123,26,0.5); }
+      50% { box-shadow: 0 0 0 8px rgba(224,123,26,0); }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 160px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 50%, rgba(26,127,212,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 10% 70%, rgba(26,127,212,0.04) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .urgency-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(224,123,26,0.12);
+      border: 1px solid rgba(224,123,26,0.35);
+      color: var(--orange);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .urgency-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: blink 1.2s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+    .hero-title .blue { color: var(--accent2); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-guarantees {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .guarantee-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.93rem;
+      color: var(--text);
+    }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 7px;
+      font-family: 'Heebo', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .btn-blue {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .btn-blue:hover {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      box-shadow: 0 0 28px rgba(26,127,212,0.45);
+      transform: translateY(-2px);
+    }
+    .btn-orange {
+      background: var(--orange);
+      color: white;
+      border-color: var(--orange);
+    }
+    .btn-orange:hover {
+      background: #f08c30;
+      box-shadow: 0 0 24px rgba(224,123,26,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px; right: -1px;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      border-radius: 18px 18px 0 0;
+    }
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .card-header h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+    .card-header p { color: var(--muted); font-size: 0.88rem; }
+    .form-field {
+      margin-bottom: 1rem;
+    }
+    .form-field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.25s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-field input::placeholder { color: var(--muted); }
+    .form-submit-full {
+      width: 100%;
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .form-submit-full:hover { background: #f08c30; transform: translateY(-1px); }
+    .form-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    .trust-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .trust-icon { font-size: 1.3rem; }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 6rem 0;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .service-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .service-time {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent2);
+      background: rgba(26,127,212,0.1);
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── WHY US ── */
+    #why {
+      padding: 6rem 0;
+      background: var(--surface);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      margin-top: 2rem;
+    }
+    .why-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+    .why-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(26,127,212,0.12);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent2);
+      flex-shrink: 0;
+    }
+    .why-item-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 0.3rem;
+    }
+    .why-item-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .why-visual {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .big-phone {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+    .why-visual h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .why-visual p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .phone-number {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent2);
+      display: block;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.04em;
+    }
+    .available-now {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--green);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .green-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 1.5s infinite;
+    }
+
+    /* ── PROCESS ── */
+    #process {
+      padding: 6rem 0;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      margin-top: 3rem;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      right: 12%;
+      left: 12%;
+      height: 1px;
+      background: var(--border);
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin: 0 auto 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .step-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .step-desc { font-size: 0.84rem; color: var(--muted); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      padding: 6rem 0;
+      background: var(--surface);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+    .stars { color: #fbbf24; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 1rem; }
+    .testimonial-text { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(26,127,212,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.88rem; color: var(--accent2);
+      flex-shrink: 0;
+    }
+    .author-name { font-weight: 600; font-size: 0.9rem; }
+    .author-role { font-size: 0.76rem; color: var(--muted); }
+
+    /* ── CTA ── */
+    #cta {
+      padding: 6rem 0;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--orange), var(--accent), var(--accent2));
+    }
+    .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
+    .cta-box p { color: var(--muted); margin-bottom: 2.5rem; max-width: 460px; margin-inline: auto; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060809;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .footer-logo .accent { color: var(--accent2); }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.83rem;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--accent2); }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .footer-copy a { color: var(--accent2); }
+
+    @media (max-width: 768px) {
+      nav { top: 76px; }
+      .topbar { top: 38px; }
+      .hero-grid { grid-template-columns: 1fr; padding-top: 2rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .nav-links { display: none; }
+      #hero { padding-top: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Demo Banner -->
+<div class="demo-banner">
+  🔧 אתר לדוגמא – נבנה על ידי <a href="Ori WebLab – סטודיו לפיתוח אתרים.html">Ori WebLab</a> | רוצה אתר כזה? <a href="Ori WebLab – סטודיו לפיתוח אתרים.html#contact">צור קשר</a>
+</div>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-badge">
+      <span class="urgency-dot"></span>
+      זמינים עכשיו לחירום 24/7
+    </div>
+    <div class="topbar-phone">📞 050-111-2222</div>
+    <div>מרכז ⟨ ₪ גוש דן ₪ ⟩</div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-logo">שרברב <span class="accent">אקספרס</span> <span class="orange">⚡</span></div>
+    <div class="nav-links">
+      <a href="#services">שירותים</a>
+      <a href="#why">למה אנחנו</a>
+      <a href="#process">תהליך</a>
+      <a href="#testimonials">המלצות</a>
+    </div>
+    <a href="tel:0501112222" class="emergency-btn">🚨 חירום עכשיו</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg-gradient"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="urgency-tag">
+          <span class="urgency-dot"></span>
+          זמינים 24 שעות ביממה
+        </div>
+        <h1 class="hero-title">
+          אינסטלציה <span class="blue">מהירה ומקצועית</span><br>
+          כשאתה הכי צריך
+        </h1>
+        <p class="hero-sub">
+          צינור פרוץ? ברז דולף? סתימה? אנחנו מגיעים תוך 45 דקות לכל אזור גוש דן – 24/7, כולל שבתות וחגים.
+        </p>
+        <div class="hero-guarantees">
+          <div class="guarantee-item">
+            <div class="check-icon">✓</div>
+            הגעה תוך 45 דקות מרגע הפנייה
+          </div>
+          <div class="guarantee-item">
+            <div class="check-icon">✓</div>
+            אומדן מחיר לפני התחלת עבודה – ללא הפתעות
+          </div>
+          <div class="guarantee-item">
+            <div class="check-icon">✓</div>
+            אחריות מלאה על כל עבודה – שנה שלמה
+          </div>
+          <div class="guarantee-item">
+            <div class="check-icon">✓</div>
+            בעלי רישיון, מבוטחים ועם 12 שנות ניסיון
+          </div>
+        </div>
+        <div class="hero-cta-group">
+          <a href="tel:0501112222" class="btn btn-orange">📞 050-111-2222 – חירום</a>
+          <a href="#contact" class="btn btn-outline">קבע תור רגיל</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="card-header">
+          <h3>קבע ביקור מקצועי</h3>
+          <p>נחזור אליך תוך 15 דקות</p>
+        </div>
+        <form onsubmit="return false">
+          <div class="form-field">
+            <label>שם מלא</label>
+            <input type="text" placeholder="ישראל ישראלי">
+          </div>
+          <div class="form-field">
+            <label>טלפון</label>
+            <input type="tel" placeholder="050-000-0000">
+          </div>
+          <div class="form-field">
+            <label>סוג הבעיה</label>
+            <select>
+              <option value="" disabled selected>בחר/י</option>
+              <option>צינור פרוץ – חירום!</option>
+              <option>ברז דולף</option>
+              <option>סתימה בביוב</option>
+              <option>דוד שמש / בוילר</option>
+              <option>התקנת אינסטלציה חדשה</option>
+              <option>אחר</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>עיר</label>
+            <input type="text" placeholder="תל אביב, גבעתיים, רמת גן...">
+          </div>
+          <button type="submit" class="form-submit-full">שלח בקשת ביקור ⚡</button>
+          <p class="form-note">✓ ללא עלות הצעת מחיר | ✓ מענה תוך 15 דקות</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-items">
+      <div class="trust-item"><span class="trust-icon">⏱️</span> הגעה תוך 45 דקות</div>
+      <div class="trust-item"><span class="trust-icon">🛡️</span> אחריות שנה</div>
+      <div class="trust-item"><span class="trust-icon">💰</span> מחיר הוגן וידוע מראש</div>
+      <div class="trust-item"><span class="trust-icon">⭐</span> 4.9 ב-Google (340 ביקורות)</div>
+      <div class="trust-item"><span class="trust-icon">📋</span> רישיון קבלן מוסמך</div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="container">
+    <span class="section-label">מה אנחנו עושים</span>
+    <h2 class="section-title">השירותים שלנו</h2>
+    <p class="section-sub">פתרונות אינסטלציה מקצועיים לכל בעיה – מתיקונים קטנים ועד פרויקטים גדולים.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🚰</div>
+        <div class="service-name">תיקון צינורות</div>
+        <p class="service-desc">פיצוץ צינורות, נזילות, חיבורים רופפים. תיקון מיידי עם חומרים איכותיים.</p>
+        <span class="service-time">⚡ שירות חירום זמין</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚿</div>
+        <div class="service-name">פתיחת סתימות</div>
+        <p class="service-desc">סתימות בכיור, אסלה, מקלחת וביוב. ציוד מתקדם לפתרון מהיר ויעיל.</p>
+        <span class="service-time">⚡ שירות חירום זמין</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔥</div>
+        <div class="service-name">דוד שמש ובוילר</div>
+        <p class="service-desc">תיקון, החלפה והתקנה של דודי שמש, בוילרים ומערכות חימום מים.</p>
+        <span class="service-time">📅 לפי תור</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <div class="service-name">אינסטלציה חדשה</div>
+        <p class="service-desc">התקנת מטבח, אמבטיה, כיור ובאתרים חדשים. פרויקטים מא' עד ת'.</p>
+        <span class="service-time">📅 לפי תור</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💧</div>
+        <div class="service-name">גילוי נזילות</div>
+        <p class="service-desc">איתור נזילות נסתרות בקירות ותקרות עם ציוד אלקטרוני ללא פיצוץ.</p>
+        <span class="service-time">📅 לפי תור</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <div class="service-name">מערכות השקיה</div>
+        <p class="service-desc">תכנון, התקנה ותיקון של מערכות השקיה לגינות, מרפסות ועסקים.</p>
+        <span class="service-time">📅 לפי תור</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Us -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <span class="section-label">למה לבחור בנו</span>
+        <h2 class="section-title">לא כל שרברב הוא שרברב אקספרס</h2>
+        <p style="color: var(--muted); margin-bottom: 0.5rem;">12 שנות ניסיון בגוש דן. מאות לקוחות חוזרים. אנחנו עושים את העבודה נכון בפעם הראשונה.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <div>
+              <div class="why-item-title">הגעה מהירה – 45 דקות</div>
+              <div class="why-item-desc">לא חכייה של שעות. אנחנו מעריכים את הזמן שלך.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <div>
+              <div class="why-item-title">שקיפות מלאה במחיר</div>
+              <div class="why-item-desc">מחיר מוסכם לפני תחילת עבודה. ללא תוספות מפתיעות.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <div>
+              <div class="why-item-title">אחריות על העבודה</div>
+              <div class="why-item-desc">שנה אחריות מלאה. אם משהו לא בסדר – נחזור ונתקן.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">04</div>
+            <div>
+              <div class="why-item-title">מורשים ומבוטחים</div>
+              <div class="why-item-desc">רישיון קבלן מוסמך + ביטוח מקצועי מלא.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <div class="big-phone">📞</div>
+        <h3>בעיה דחופה?</h3>
+        <p>זמינים עכשיו. מגיבים תוך דקות.</p>
+        <span class="phone-number">050-111-2222</span>
+        <div class="available-now">
+          <span class="green-dot"></span>
+          זמינים עכשיו – 24/7
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process">
+  <div class="container" style="text-align:center;">
+    <span class="section-label">איך זה עובד</span>
+    <h2 class="section-title">4 צעדים פשוטים</h2>
+    <p class="section-sub" style="margin-inline:auto;">מהפנייה ועד לתיקון – הכל פשוט, מהיר ושקוף.</p>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-circle">1</div>
+        <div class="step-title">פנייה</div>
+        <div class="step-desc">התקשר/י או מלא/י טופס. נענה תוך דקות.</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <div class="step-title">אומדן</div>
+        <div class="step-desc">נסביר מה הבעיה ונציג מחיר ברור מראש.</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-title">הגעה</div>
+        <div class="step-desc">מגיעים תוך 45 דקות עם כל הציוד הנדרש.</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">4</div>
+        <div class="step-title">פתרון</div>
+        <div class="step-desc">תיקון מקצועי + אחריות שנה על העבודה.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="container">
+    <span class="section-label">לקוחות מרוצים</span>
+    <h2 class="section-title">מה הם אומרים עלינו</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"צינור פרץ לי ב-11 בלילה. התקשרתי ותוך 40 דקות כבר היה אצלי. תיקן, ניקה והכל היה מסודר. מחיר הוגן, שירות מדהים!"</p>
+        <div class="testimonial-author">
+          <div class="avatar">ד</div>
+          <div>
+            <div class="author-name">דוד כהן</div>
+            <div class="author-role">תל אביב</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"גיליתי נזילה בקיר. הוא מצא אותה ב-20 דקות בלי לפצוץ כלום, תיקן ויצא. שרברבים אחרים רצו לפצוץ כל הקיר. ממליצה מאוד!"</p>
+        <div class="testimonial-author">
+          <div class="avatar">מ</div>
+          <div>
+            <div class="author-name">מיכל שמואלי</div>
+            <div class="author-role">גבעתיים</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"עשה לנו אינסטלציה שלמה לדירה משופצת. עבד בדייקנות, עמד בלוחות הזמנים ובמחיר המוסכם. בונה על הוא גם לדירה הבאה."</p>
+        <div class="testimonial-author">
+          <div class="avatar">א</div>
+          <div>
+            <div class="author-name">אלי ממן</div>
+            <div class="author-role">רמת גן</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <span class="section-label">מוכן/ה לפתרון?</span>
+      <h2>אל תמתין/י עם בעיה באינסטלציה</h2>
+      <p>כל דקה שמחכים – הנזק גדל. התקשר/י עכשיו לשירות מהיר ומקצועי.</p>
+      <div class="cta-btns">
+        <a href="tel:0501112222" class="btn btn-orange">📞 התקשר/י עכשיו</a>
+        <a href="https://wa.me/972501112222" class="btn btn-blue">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">שרברב <span class="accent">אקספרס</span></div>
+      <div class="footer-links">
+        <a href="#services">שירותים</a>
+        <a href="#why">אודות</a>
+        <a href="#testimonials">המלצות</a>
+      </div>
+    </div>
+    <p class="footer-copy">
+      © 2024 שרברב אקספרס. כל הזכויות שמורות. |
+      <a href="Ori WebLab – סטודיו לפיתוח אתרים.html">בניית האתר: Ori WebLab</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
