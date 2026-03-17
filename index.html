@@ -1527,7 +1527,8 @@
 
       <!-- Form column -->
       <div class="contact-form reveal reveal-delay-2" role="region" aria-label="טופס יצירת קשר">
-        <form id="contactForm" novalidate="">
+        <form id="contactForm" name="contact" data-netlify="true" novalidate="">
+          <input type="hidden" name="form-name" value="contact">
           <div class="form-group">
             <label class="form-label" for="fname">שם מלא</label>
             <input class="form-input" type="text" id="fname" name="name" placeholder="ישראל ישראלי" autocomplete="name" required="">
@@ -1820,12 +1821,21 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'שולח...';
 
-    // Simulate async send (replace with real endpoint as needed)
-    setTimeout(() => {
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+    .then(() => {
       form.reset();
       submitBtn.style.display = 'none';
       successMsg.style.display = 'block';
-    }, 900);
+    })
+    .catch(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'שלחו הודעה';
+      alert('שגיאה בשליחה, נסו שוב.');
+    });
   });
 
   // Clear error border on input
