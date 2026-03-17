@@ -111,6 +111,9 @@
       padding-top: 120px;
       position: relative;
       overflow: hidden;
+      background-image: linear-gradient(rgba(14,11,9,0.78), rgba(14,11,9,0.78)), url('https://images.unsplash.com/photo-1522337360826-9812f43fa3fa?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
     }
 
     .hero-bg {
@@ -420,11 +423,12 @@
       flex-direction: column;
       gap: 0.5rem;
     }
-    .gallery-fill-1 { background: linear-gradient(145deg, #2a1c12, #1a1008); }
-    .gallery-fill-2 { background: linear-gradient(145deg, #1e1a14, #130f0a); }
-    .gallery-fill-3 { background: linear-gradient(145deg, #241c10, #14100a); }
-    .gallery-fill-4 { background: linear-gradient(145deg, #2e1e10, #1c1208); }
-    .gallery-fill-5 { background: linear-gradient(145deg, #1c1a16, #100e0c); }
+    .gallery-fill-1 { background-image: url('https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80'); background-size:cover; background-position:center; }
+    .gallery-fill-2 { background-image: url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=600&q=80'); background-size:cover; background-position:center; }
+    .gallery-fill-3 { background-image: url('https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80'); background-size:cover; background-position:center; }
+    .gallery-fill-4 { background-image: url('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=600&q=80'); background-size:cover; background-position:center; }
+    .gallery-fill-5 { background-image: url('https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=600&q=80'); background-size:cover; background-position:center; }
+    .gallery-icon { display: none; }
     .gallery-label {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -728,15 +732,7 @@
     <div class="about-grid">
       <div class="about-visual">
         <div class="about-box">
-          <div class="about-box-inner">
-            <svg class="about-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="35" r="28" stroke="#b08d5b" stroke-width="2.5"/>
-              <path d="M22 90 Q50 70 78 90" stroke="#b08d5b" stroke-width="2.5" fill="none"/>
-              <path d="M35 35 Q50 55 65 35" stroke="#b08d5b" stroke-width="2" fill="none"/>
-            </svg>
-            <div class="about-box-title">מיכל כהן</div>
-            <div class="about-box-sub">בעלת הסלון ומעצבת ראשית</div>
-          </div>
+          <img src="https://images.unsplash.com/photo-1560066984-138daef929ba?auto=format&fit=crop&w=800&q=80" alt="מעצבת שיער" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
         </div>
         <div class="about-badge">
           <span class="badge-num">7+</span>
