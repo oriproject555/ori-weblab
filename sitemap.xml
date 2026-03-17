@@ -1,0 +1,33 @@
+﻿<?xml version=1.0 encoding=UTF-8?>
+<urlset xmlns=http://www.sitemaps.org/schemas/sitemap/0.9>
+  <url>
+    <loc>https://gilded-palmier-583dd2.netlify.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gilded-palmier-583dd2.netlify.app/demo-1-mitzpe-hair.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gilded-palmier-583dd2.netlify.app/demo-2-plumber-landing.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gilded-palmier-583dd2.netlify.app/demo-3-accountant.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gilded-palmier-583dd2.netlify.app/demo-4-restaurant.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gilded-palmier-583dd2.netlify.app/demo-5-fitness.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
