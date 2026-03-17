@@ -1565,10 +1565,7 @@
 
       <!-- Form column -->
       <div class="contact-form reveal reveal-delay-2" role="region" aria-label="טופס יצירת קשר">
-        <form id="contactForm" action="https://formsubmit.co/oriproject555@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="פנייה חדשה מ-Ori WebLab">
-          <input type="hidden" name="_next" value="https://oriproject555.github.io/ori-weblab/#contact">
-          <input type="hidden" name="_captcha" value="false">
+        <form id="contactForm" novalidate>
           <div class="form-group">
             <label class="form-label" for="fname">שם מלא</label>
             <input class="form-input" type="text" id="fname" name="name" placeholder="ישראל ישראלי" autocomplete="name" required="">
@@ -1830,8 +1827,58 @@
   sections.forEach(s => sectionObserver.observe(s));
 
   /* ── Contact form ──────────────────────────────────────────────── */
-  // Clear error border on input
   const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('fname').value.trim();
+    const email   = document.getElementById('femail').value.trim();
+    const phone   = document.getElementById('fphone').value.trim();
+    const message = document.getElementById('fmessage').value.trim();
+
+    if (!name || !email || !message) {
+      [
+        { el: document.getElementById('fname'),    val: name },
+        { el: document.getElementById('femail'),   val: email },
+        { el: document.getElementById('fmessage'), val: message }
+      ].forEach(({ el, val }) => { el.style.borderColor = val ? '' : 'rgba(220,80,80,0.7)'; });
+      return;
+    }
+
+    const submitBtn = form.querySelector('.form-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'שולח...';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: '73f849d3-d0bf-48b3-933c-772a4dde0720',
+        subject: 'פנייה חדשה מ-Ori WebLab',
+        name, email, phone, message
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        form.reset();
+        submitBtn.style.display = 'none';
+        successMsg.style.display = 'block';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'שלחו הודעה';
+        alert('שגיאה בשליחה, נסו שוב.');
+      }
+    })
+    .catch(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'שלחו הודעה';
+      alert('שגיאה בשליחה, נסו שוב.');
+    });
+  });
+
   form.querySelectorAll('.form-input, .form-textarea').forEach(el => {
     el.addEventListener('input', () => { el.style.borderColor = ''; });
   });
