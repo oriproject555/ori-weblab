@@ -1858,12 +1858,24 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'שולח...';
 
-    // Simulate async send (replace with real endpoint as needed)
-    setTimeout(() => {
+    const phone = document.getElementById('fphone').value.trim();
+
+    fetch('https://formsubmit.co/ajax/oriproject555@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, phone, message, _subject: 'פנייה חדשה מ-Ori WebLab' })
+    })
+    .then(res => res.json())
+    .then(() => {
       form.reset();
       submitBtn.style.display = 'none';
       successMsg.style.display = 'block';
-    }, 900);
+    })
+    .catch(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'שלחו הודעה';
+      alert('שגיאה בשליחה, נסו שוב.');
+    });
   });
 
   // Clear error border on input
