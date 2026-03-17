@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PowerPeak – סטודיו לאימון אישי | יובל כהן</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #07090C;
+      --surface:  #0D1117;
+      --accent:   #FF5533;
+      --accent2:  #FF7A5C;
+      --text:     #F0EDE8;
+      --muted:    #7A8090;
+      --border:   rgba(255,85,51,0.2);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    h1,h2,h3 { font-family: 'Frank Ruhl Libre', serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { width: min(1100px, 92vw); margin-inline: auto; }
+
+    .demo-banner { background: #C9A84C; color: #0D0F14; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; }
+    .demo-banner a { color: #0D0F14; text-decoration: underline; margin-right: 0.5rem; }
+
+    nav { position: fixed; top: 38px; right: 0; left: 0; z-index: 100; padding: 1.2rem 0; background: rgba(7,9,12,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+    nav.scrolled { background: rgba(7,9,12,0.97); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Frank Ruhl Libre', serif; font-size: 1.4rem; font-weight: 700; }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); transition: color 0.25s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-btn { background: var(--accent); color: var(--bg); padding: 0.55rem 1.4rem; border-radius: 5px; font-weight: 600; font-size: 0.88rem; transition: background 0.25s, transform 0.25s; }
+    .nav-btn:hover { background: var(--accent2); transform: translateY(-1px); }
+    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 65% 40%, rgba(255,85,51,0.1) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 5% 90%, rgba(255,85,51,0.05) 0%, transparent 55%); }
+    .hero-deco { position: absolute; left: 5%; top: 50%; transform: translateY(-50%); opacity: 0.05; width: 320px; pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.5rem; }
+    .hero-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent2); }
+    .hero-title { font-size: clamp(2.8rem, 5.5vw, 4.5rem); font-weight: 700; margin-bottom: 1.2rem; }
+    .hero-title em { font-style: normal; color: var(--accent2); }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 500px; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; border-radius: 6px; font-family: 'Heebo', sans-serif; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
+    .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); box-shadow: 0 0 24px rgba(255,85,51,0.4); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--text); border-color: rgba(240,237,232,0.3); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat-number { font-family: 'Frank Ruhl Libre', serif; font-size: 2rem; font-weight: 700; color: var(--accent2); }
+    .stat-label { font-size: 0.82rem; color: var(--muted); }
+
+    .section-label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.75rem; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; margin-bottom: 0.75rem; }
+    .section-sub { font-size: 1rem; color: var(--muted); max-width: 520px; margin-bottom: 3rem; }
+    .accent-line { width: 48px; height: 2px; background: linear-gradient(to left, var(--accent2), transparent); margin-bottom: 3rem; }
+
+    #programs { padding: 7rem 0; }
+    .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: start; }
+    .program-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem 1.8rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; }
+    .program-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(255,85,51,0.12); }
+    .program-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,85,51,0.15); }
+    .featured-badge { position: absolute; top: -14px; right: 50%; transform: translateX(50%); background: var(--accent); color: var(--bg); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 1rem; border-radius: 20px; white-space: nowrap; }
+    .program-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .program-name { font-family: 'Frank Ruhl Libre', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .program-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.2rem; }
+    .program-freq { display: inline-block; background: rgba(255,85,51,0.1); color: var(--accent2); font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .program-price { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .program-price span { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+    .program-btn { display: block; width: 100%; margin-top: 1.5rem; background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.7rem; border-radius: 8px; font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.25s; text-decoration: none; }
+    .program-card.featured .program-btn { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .program-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+    #about { padding: 7rem 0; background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-visual { position: relative; }
+    .about-box { aspect-ratio: 3/4; border-radius: 16px; background: linear-gradient(145deg, #1a1010 0%, #0a0707 100%); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .about-box-inner { text-align: center; padding: 2rem; }
+    .about-emoji { font-size: 5rem; opacity: 0.4; margin-bottom: 1rem; display: block; }
+    .about-box-title { font-family: 'Frank Ruhl Libre', serif; font-size: 1.6rem; color: var(--accent2); margin-bottom: 0.4rem; }
+    .about-box-sub { color: var(--muted); font-size: 0.88rem; }
+    .about-badge { position: absolute; bottom: -1.5rem; left: -1.5rem; background: var(--accent); color: var(--bg); border-radius: 12px; padding: 1rem 1.4rem; font-weight: 700; font-family: 'Frank Ruhl Libre', serif; }
+    .badge-num { font-size: 2rem; display: block; }
+    .badge-txt { font-size: 0.8rem; font-family: 'Heebo', sans-serif; font-weight: 600; }
+    .about-text h2 { margin-bottom: 0.75rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; line-height: 1.75; }
+    .about-list { margin: 1.5rem 0 2rem; }
+    .about-list li { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+    .about-list li::before { content: '✦'; color: var(--accent2); font-size: 0.7rem; flex-shrink: 0; }
+
+    #results { padding: 7rem 0; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; transition: border-color 0.3s; }
+    .testimonial-card:hover { border-color: var(--accent); }
+    .result-badge { display: inline-block; background: rgba(255,85,51,0.1); color: var(--accent2); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 20px; margin-bottom: 1rem; }
+    .stars { color: var(--accent2); font-size: 0.9rem; margin-bottom: 0.8rem; letter-spacing: 2px; }
+    .testimonial-text { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.4rem; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,85,51,0.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: var(--accent2); flex-shrink: 0; }
+    .author-name { font-weight: 600; font-size: 0.92rem; }
+    .author-role { font-size: 0.78rem; color: var(--muted); }
+
+    #booking { padding: 7rem 0; background: var(--surface); }
+    .booking-box { background: linear-gradient(135deg, var(--bg) 0%, rgba(255,85,51,0.07) 100%); border: 1px solid var(--border); border-radius: 20px; padding: 4rem 3rem; text-align: center; }
+    .booking-box h2 { margin-bottom: 1rem; font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+    .booking-box p { color: var(--muted); max-width: 460px; margin-inline: auto; margin-bottom: 2.5rem; }
+    .booking-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3rem 0 2rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+    .footer-logo { font-family: 'Frank Ruhl Libre', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .footer-logo span { color: var(--accent2); }
+    .footer-tagline { color: var(--muted); font-size: 0.88rem; }
+    .footer-info { color: var(--muted); font-size: 0.88rem; line-height: 2; }
+    .footer-copy { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-btn { display: none; }
+      .nav-mobile-toggle { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-badge { bottom: -1rem; left: -0.5rem; }
+      .hero-stats { gap: 1.5rem; }
+      .booking-box { padding: 2.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; }
+    }
+    .mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a { font-size: 1.5rem; font-family: 'Frank Ruhl Libre', serif; color: var(--text); }
+    .mobile-menu a:hover { color: var(--accent2); }
+    .mobile-menu-close { position: absolute; top: 1.5rem; left: 1.5rem; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  🎯 אתר לדוגמה בלבד – נבנה על ידי <a href="https://gilded-palmier-583dd2.netlify.app">Ori WebLab</a> | רוצים אתר כזה? דברו איתנו
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
+  <a href="#programs">תוכניות</a>
+  <a href="#about">אודות</a>
+  <a href="#results">תוצאות</a>
+  <a href="#booking">צור קשר</a>
+  <a href="#booking" class="btn btn-primary">התחל עכשיו</a>
+</div>
+
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">Power<span>Peak</span></a>
+    <ul class="nav-links">
+      <li><a href="#programs">תוכניות</a></li>
+      <li><a href="#about">אודות</a></li>
+      <li><a href="#results">תוצאות</a></li>
+      <li><a href="#booking">צור קשר</a></li>
+    </ul>
+    <a href="#booking" class="nav-btn">התחל עכשיו</a>
+    <button class="nav-mobile-toggle" id="mobileToggle" aria-label="תפריט">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-deco" viewBox="0 0 200 200" fill="none">
+    <rect x="20" y="85" width="160" height="30" rx="15" stroke="#FF5533" stroke-width="1.5"/>
+    <circle cx="28" cy="100" r="22" stroke="#FF5533" stroke-width="1.5"/>
+    <circle cx="172" cy="100" r="22" stroke="#FF5533" stroke-width="1.5"/>
+    <circle cx="28" cy="100" r="12" fill="#FF5533" opacity="0.25"/>
+    <circle cx="172" cy="100" r="12" fill="#FF5533" opacity="0.25"/>
+    <line x1="100" y1="30" x2="100" y2="170" stroke="#FF5533" stroke-width="1" opacity="0.3"/>
+  </svg>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">מאמן אישי מוסמך · תל אביב</div>
+      <h1 class="hero-title">גוף חזק מתחיל<br><em>בהחלטה אחת</em></h1>
+      <p class="hero-sub">תוכניות אימון מותאמות אישית שיגרמו לך להגיע ליעדים שלך – מהר יותר ממה שחשבת. תוצאות אמיתיות, בגישה מקצועית.</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn btn-primary">💪 אימון ניסיון חינם</a>
+        <a href="#results" class="btn btn-outline">צפה בתוצאות</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-number">+150</div><div class="stat-label">לקוחות מרוצים</div></div>
+        <div><div class="stat-number">7</div><div class="stat-label">שנות ניסיון</div></div>
+        <div><div class="stat-number">98%</div><div class="stat-label">השגת יעדים</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">התוכניות שלנו</div>
+      <h2 class="section-title">בחרו את התוכנית המתאימה לכם</h2>
+      <p class="section-sub">כל תוכנית כוללת ליווי אישי, תוכנית תזונה ומעקב שבועי.</p>
+      <div class="accent-line"></div>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <div class="program-icon">💪</div>
+        <div class="program-name">בסיס וכוח</div>
+        <div class="program-desc">למתחילים ומתקדמים. בניית שריר, שיפור כוח, יציבה ואיזון גופני.</div>
+        <div class="program-freq">3 אימונים / שבוע</div>
+        <div class="program-price">₪600 <span>/ חודש</span></div>
+        <a href="#booking" class="program-btn">בחר תוכנית</a>
+      </div>
+      <div class="program-card featured reveal">
+        <div class="featured-badge">🔥 הכי פופולרי</div>
+        <div class="program-icon">🏆</div>
+        <div class="program-name">טרנספורמציה מלאה</div>
+        <div class="program-desc">תוכנית 90 יום אינטנסיבית לשינוי הגוף — חיטוב, שריפת שומן ובניית שריר בו-זמנית.</div>
+        <div class="program-freq">5 אימונים / שבוע</div>
+        <div class="program-price">₪900 <span>/ חודש</span></div>
+        <a href="#booking" class="program-btn">בחר תוכנית</a>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">🔥</div>
+        <div class="program-name">ירידה במשקל</div>
+        <div class="program-desc">שריפת שומן וחיטוב מוכחים. שילוב תוכנית תזונה + אימון קרדיו וכוח.</div>
+        <div class="program-freq">4 אימונים / שבוע</div>
+        <div class="program-price">₪750 <span>/ חודש</span></div>
+        <a href="#booking" class="program-btn">בחר תוכנית</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-box">
+          <div class="about-box-inner">
+            <span class="about-emoji">🏋️</span>
+            <div class="about-box-title">יובל כהן</div>
+            <div class="about-box-sub">מאמן אישי מוסמך</div>
+          </div>
+        </div>
+        <div class="about-badge">
+          <span class="badge-num">7</span>
+          <span class="badge-txt">שנות ניסיון</span>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-label">אודות המאמן</div>
+        <h2 class="section-title">יובל כהן – מאמן אישי</h2>
+        <div class="accent-line"></div>
+        <p>יובל הוא מאמן כושר אישי מוסמך עם תואר בחינוך גופני ואישורים בינלאומיים. הוא עבד עם ספורטאים מקצועיים ועם אנשים רגילים שרוצים לשנות את חייהם.</p>
+        <p>הגישה של יובל מבוססת על מדע, סבלנות ותוצאות. כל לקוח מקבל תוכנית אישית שמותאמת לגוף, ליעדים ולאורח החיים שלו.</p>
+        <ul class="about-list">
+          <li>תואר בחינוך גופני, אוניברסיטת תל אביב</li>
+          <li>מוסמך IFBB ו-ACE International</li>
+          <li>מתמחה בטרנספורמציה גופנית</li>
+          <li>תוכנית תזונה אישית לכל לקוח</li>
+        </ul>
+        <a href="#booking" class="btn btn-primary">קבע אימון ניסיון חינם</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="container">
+    <div class="reveal" style="text-align:center; margin-bottom:1rem;">
+      <div class="section-label">תוצאות אמיתיות</div>
+      <h2 class="section-title">מה אומרים הלקוחות שלנו</h2>
+      <div class="accent-line" style="margin-inline:auto;"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="result-badge">📉 ירידה של 18 ק״ג</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">״ירדתי 18 ק״ג תוך 4 חודשים! יובל שינה את חיי. הגישה המקצועית והסבלנות שלו עשו את כל ההבדל.״</p>
+        <div class="testimonial-author">
+          <div class="avatar">ר</div>
+          <div><div class="author-name">רועי מזרחי</div><div class="author-role">תוכנית ירידה במשקל</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="result-badge">💪 הוספת 8 ק״ג שריר</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">״הגוף שרציתי תמיד – עכשיו זה מציאות. תוכנית הטרנספורמציה הייתה מאתגרת אבל התוצאות מדברות בעד עצמן.״</p>
+        <div class="testimonial-author">
+          <div class="avatar">נ</div>
+          <div><div class="author-name">נועה שפירא</div><div class="author-role">תוכנית טרנספורמציה מלאה</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="result-badge">🏋️ שיפור כוח 40%</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">״מקצועי, סבלני, ומוביל לתוצאות. ב-3 חודשים הכפלתי את המשקולות שאני מרים. ממליץ בחום לכולם!״</p>
+        <div class="testimonial-author">
+          <div class="avatar">א</div>
+          <div><div class="author-name">אייל דהן</div><div class="author-role">תוכנית בסיס וכוח</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="container">
+    <div class="booking-box reveal">
+      <h2>אימון ניסיון ראשון – בחינם</h2>
+      <p>קבעו איתנו שיחת ייעוץ ואימון ניסיון ללא עלות וללא התחייבות. בואו לראות בעצמכם מה זה אימון אישי אמיתי.</p>
+      <div class="booking-btns">
+        <a href="tel:0505550000" class="btn btn-primary">📞 050-555-0000</a>
+        <a href="https://wa.me/972505550000" class="btn btn-outline">💬 וואטסאפ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Power<span>Peak</span></div>
+        <div class="footer-tagline">מאמן אישי מוסמך | יובל כהן</div>
+      </div>
+      <div class="footer-info">
+        <div>📍 תל אביב והסביבה</div>
+        <div>⏰ א׳–ו׳: 06:00–22:00</div>
+        <div>📞 050-555-0000</div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2025 PowerPeak | אתר זה נבנה על ידי <a href="https://gilded-palmier-583dd2.netlify.app" style="color:var(--accent2)">Ori WebLab</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+  document.getElementById('mobileToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+  document.getElementById('mobileMenuClose').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
