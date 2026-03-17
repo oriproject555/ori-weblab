@@ -1527,8 +1527,11 @@
 
       <!-- Form column -->
       <div class="contact-form reveal reveal-delay-2" role="region" aria-label="טופס יצירת קשר">
-        <form id="contactForm" name="contact" data-netlify="true" novalidate="">
-          <input type="hidden" name="form-name" value="contact">
+        <form id="contactForm" action="https://formsubmit.co/oriproject555@gmail.com" method="POST" novalidate="">
+          <input type="hidden" name="_subject" value="פנייה חדשה מהאתר – Ori WebLab">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://gilded-palmier-583dd2.netlify.app/?sent=1">
           <div class="form-group">
             <label class="form-label" for="fname">שם מלא</label>
             <input class="form-input" type="text" id="fname" name="name" placeholder="ישראל ישראלי" autocomplete="name" required="">
@@ -1821,15 +1824,27 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'שולח...';
 
-    fetch('/', {
+    fetch('https://formsubmit.co/oriproject555@gmail.com', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name:    document.getElementById('fname').value.trim(),
+        email:   document.getElementById('femail').value.trim(),
+        phone:   document.getElementById('fphone').value.trim(),
+        message: document.getElementById('fmessage').value.trim(),
+        _subject: 'פנייה חדשה מהאתר – Ori WebLab',
+        _template: 'table'
+      })
     })
-    .then(() => {
-      form.reset();
-      submitBtn.style.display = 'none';
-      successMsg.style.display = 'block';
+    .then(res => res.json())
+    .then(data => {
+      if (data.success === 'true' || data.success === true) {
+        form.reset();
+        submitBtn.style.display = 'none';
+        successMsg.style.display = 'block';
+      } else {
+        throw new Error('failed');
+      }
     })
     .catch(() => {
       submitBtn.disabled = false;
