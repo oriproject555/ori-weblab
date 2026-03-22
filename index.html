@@ -1312,6 +1312,109 @@
     @media (max-width: 580px) {
       .testimonials-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── 3D Scroll Animations ───────────────────────────────────────── */
+
+    /* Perspective wrappers */
+    #services .services-grid,
+    #testimonials .testimonials-grid,
+    #stats .stats-grid {
+      perspective: 1200px;
+    }
+
+    /* Base state: hidden + 3D rotated */
+    .reveal-3d {
+      opacity: 0;
+      transform: perspective(900px) rotateX(40deg) translateY(60px) scale(0.92);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform, opacity;
+    }
+    .reveal-3d.reveal-3d-left {
+      transform: perspective(900px) rotateY(35deg) translateX(-60px) scale(0.92);
+    }
+    .reveal-3d.reveal-3d-right {
+      transform: perspective(900px) rotateY(-35deg) translateX(60px) scale(0.92);
+    }
+    .reveal-3d.reveal-3d-up {
+      transform: perspective(900px) rotateX(-30deg) translateY(-50px) scale(0.94);
+    }
+
+    /* Visible state */
+    .reveal-3d.visible {
+      opacity: 1;
+      transform: perspective(900px) rotateX(0) rotateY(0) translateX(0) translateY(0) scale(1);
+    }
+
+    /* Stagger delays */
+    .reveal-3d.d1 { transition-delay: 0.05s; }
+    .reveal-3d.d2 { transition-delay: 0.15s; }
+    .reveal-3d.d3 { transition-delay: 0.25s; }
+    .reveal-3d.d4 { transition-delay: 0.35s; }
+    .reveal-3d.d5 { transition-delay: 0.45s; }
+
+    /* Tilt card effect */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: box-shadow 0.3s ease;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,76,0.1);
+    }
+    .tilt-card .tilt-inner {
+      transform: translateZ(20px);
+      transition: transform 0.3s ease;
+    }
+
+    /* Process steps 3D */
+    .process-step {
+      opacity: 0;
+      transform: perspective(800px) rotateX(25deg) translateY(50px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .process-step.visible {
+      opacity: 1;
+      transform: perspective(800px) rotateX(0) translateY(0);
+    }
+
+    /* Why Us cards */
+    .why-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+    }
+    .why-card:hover {
+      transform: perspective(600px) rotateX(-5deg) translateY(-8px) scale(1.02);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    }
+
+    /* Section title 3D entrance */
+    .section-3d-title {
+      opacity: 0;
+      transform: perspective(600px) rotateX(20deg) translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .section-3d-title.visible {
+      opacity: 1;
+      transform: perspective(600px) rotateX(0) translateY(0);
+    }
+
+    /* Portfolio cards 3D */
+    .portfolio-card {
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease !important;
+    }
+    .portfolio-card:hover {
+      transform: perspective(1000px) rotateY(-4deg) rotateX(3deg) translateY(-10px) scale(1.01) !important;
+      box-shadow: 12px 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.1) !important;
+    }
+
+    /* Stats number 3D pop */
+    .stat-card {
+      transform-style: preserve-3d;
+    }
+    .stat-card:hover .stat-number {
+      transform: translateZ(15px) scale(1.08);
+      transition: transform 0.3s ease;
+      display: block;
+    }
+    .stat-number { transition: transform 0.3s ease; }
 </style>
 </head>
 <body>
@@ -2461,6 +2564,186 @@
       }
     }, { threshold: 0.4 });
     obs.observe(statsSection);
+  })();
+
+  
+  /* ── 3D Scroll + Tilt Animations ───────────────────────────────── */
+  (function() {
+
+    /* 1. Add reveal-3d classes to elements */
+    function addClasses(selector, direction, delays) {
+      var els = document.querySelectorAll(selector);
+      els.forEach(function(el, i) {
+        el.classList.add('reveal-3d');
+        if (direction) el.classList.add('reveal-3d-' + direction);
+        var delay = delays ? delays[i % delays.length] : ['d1','d2','d3','d4'][i % 4];
+        el.classList.add(delay);
+      });
+    }
+
+    addClasses('.service-card', '', ['d1','d2','d3','d4']);
+    addClasses('.testimonial-card', '', ['d1','d2','d3']);
+    addClasses('.stat-card', 'up', ['d1','d2','d3','d4']);
+    addClasses('.why-icon-wrap', '', ['d1','d2','d3','d4']);
+
+    /* Process steps */
+    var processSteps = document.querySelectorAll('.process-item');
+    processSteps.forEach(function(el, i) {
+      el.classList.add('process-step');
+      el.style.transitionDelay = (i * 0.12) + 's';
+    });
+
+    /* Section title wrappers */
+    document.querySelectorAll('.section-title').forEach(function(el) {
+      el.classList.add('section-3d-title');
+    });
+
+    /* 2. Intersection Observer for 3D reveals */
+    var obs3d = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal-3d, .process-step, .section-3d-title').forEach(function(el) {
+      obs3d.observe(el);
+    });
+
+    /* 3. Tilt effect on cards (mouse move) */
+    function addTilt(selector, intensity) {
+      intensity = intensity || 12;
+      document.querySelectorAll(selector).forEach(function(card) {
+        card.classList.add('tilt-card');
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var cx = rect.left + rect.width / 2;
+          var cy = rect.top + rect.height / 2;
+          var dx = (e.clientX - cx) / (rect.width / 2);
+          var dy = (e.clientY - cy) / (rect.height / 2);
+          var rotY = dx * intensity;
+          var rotX = -dy * (intensity * 0.7);
+          card.style.transform = 'perspective(800px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.03)';
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
+          card.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1)';
+          setTimeout(function() { card.style.transition = ''; }, 500);
+        });
+      });
+    }
+
+    addTilt('.service-card', 10);
+    addTilt('.testimonial-card', 8);
+    addTilt('.stat-card', 12);
+
+    /* 4. Three.js hero upgrade */
+    (function initThreeHero() {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+      script.onload = function() {
+        var canvas = document.getElementById('heroCanvas');
+        if (!canvas) return;
+
+        var scene    = new THREE.Scene();
+        var camera   = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setClearColor(0x000000, 0);
+
+        var gold = new THREE.Color(0xC9A84C);
+        var matWire = new THREE.MeshBasicMaterial({ color: gold, wireframe: true, transparent: true, opacity: 0.18 });
+        var matLine = new THREE.LineBasicMaterial({ color: gold, transparent: true, opacity: 0.25 });
+
+        var objects = [];
+
+        /* Icosahedron */
+        var icoGeo = new THREE.IcosahedronGeometry(0.9, 1);
+        var ico = new THREE.Mesh(icoGeo, matWire.clone());
+        ico.position.set(2.5, 0.5, -1);
+        scene.add(ico);
+        objects.push({ mesh: ico, rx: 0.003, ry: 0.005 });
+
+        /* Torus */
+        var torGeo = new THREE.TorusGeometry(0.6, 0.18, 8, 24);
+        var tor = new THREE.Mesh(torGeo, matWire.clone());
+        tor.position.set(-2.8, -0.3, -0.5);
+        scene.add(tor);
+        objects.push({ mesh: tor, rx: 0.006, ry: 0.003 });
+
+        /* Octahedron */
+        var octGeo = new THREE.OctahedronGeometry(0.55, 0);
+        var oct = new THREE.Mesh(octGeo, matWire.clone());
+        oct.position.set(-1.2, 1.5, -2);
+        scene.add(oct);
+        objects.push({ mesh: oct, rx: 0.004, ry: 0.007 });
+
+        /* Small Tetrahedron */
+        var tetGeo = new THREE.TetrahedronGeometry(0.4, 0);
+        var tet = new THREE.Mesh(tetGeo, matWire.clone());
+        tet.position.set(1.5, -1.5, -1);
+        scene.add(tet);
+        objects.push({ mesh: tet, rx: 0.008, ry: 0.004 });
+
+        /* Floating particles */
+        var partGeo = new THREE.BufferGeometry();
+        var partCount = 120;
+        var positions = new Float32Array(partCount * 3);
+        for (var i = 0; i < partCount; i++) {
+          positions[i * 3]     = (Math.random() - 0.5) * 14;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
+        }
+        partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        var partMat = new THREE.PointsMaterial({ color: gold, size: 0.025, transparent: true, opacity: 0.5 });
+        var particles = new THREE.Points(partGeo, partMat);
+        scene.add(particles);
+
+        /* Mouse parallax */
+        var mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', function(e) {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 0.8;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+        });
+
+        /* Animate */
+        var heroSection = document.getElementById('hero');
+        var running = true;
+        var heroObs = new IntersectionObserver(function(entries) {
+          running = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        heroObs.observe(heroSection);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          if (!running) return;
+          objects.forEach(function(o) {
+            o.mesh.rotation.x += o.rx;
+            o.mesh.rotation.y += o.ry;
+          });
+          particles.rotation.y += 0.0005;
+          camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.04;
+          camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.04;
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        /* Resize */
+        var resObs = new ResizeObserver(function() {
+          var w = canvas.clientWidth, h = canvas.clientHeight;
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          renderer.setSize(w, h);
+        });
+        resObs.observe(canvas);
+      };
+      document.head.appendChild(script);
+    })();
+
   })();
 
   (function() {
