@@ -626,7 +626,9 @@
       .form-row { grid-template-columns: 1fr; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
     }
+    #three-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -652,6 +654,7 @@
 
 <!-- Hero -->
 <section id="hero">
+  <canvas id="three-canvas"></canvas>
   <div class="hero-bg"></div>
   <svg class="hero-deco" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M80 20 Q100 60 80 100 Q60 140 100 180 Q140 220 100 280" stroke="#b08d5b" stroke-width="3" fill="none"/>
@@ -937,6 +940,59 @@
     </p>
   </div>
 </footer>
+
+<script>
+// ── מצפה השיער: Luxury Gold Bokeh ──
+(function() {
+  const canvas = document.getElementById('three-canvas');
+  const section = document.getElementById('hero');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+  camera.position.z = 110;
+
+  const COUNT = 20;
+  const bokeh = [];
+
+  for (let i = 0; i < COUNT; i++) {
+    const size = Math.random() * 9 + 3;
+    const geo = new THREE.SphereGeometry(size, 18, 18);
+    const mat = new THREE.MeshBasicMaterial({
+      color: Math.random() > .45 ? '#b08d5b' : '#d4af78',
+      transparent: true, opacity: Math.random() * .09 + .02
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set((Math.random()-.5)*170, (Math.random()-.5)*100, (Math.random()-.5)*60);
+    scene.add(mesh);
+    bokeh.push({ mesh, vy: Math.random()*.05+.008, vx: (Math.random()-.5)*.018 });
+  }
+
+  let mx = 0, my = 0;
+  window.addEventListener('mousemove', e => { mx = (e.clientX/innerWidth-.5)*2; my = (e.clientY/innerHeight-.5)*2; });
+
+  function resize() {
+    const w = section.offsetWidth, h = section.offsetHeight;
+    renderer.setSize(w, h); camera.aspect = w/h; camera.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  let cx = 0, cy = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    bokeh.forEach(b => {
+      b.mesh.position.y += b.vy;
+      b.mesh.position.x += b.vx;
+      if (b.mesh.position.y > 65) b.mesh.position.y = -65;
+      if (Math.abs(b.mesh.position.x) > 95) b.vx *= -1;
+    });
+    cx += (mx*4-cx)*.025; cy += (-my*3-cy)*.025;
+    camera.position.x = cx; camera.position.y = cy; camera.lookAt(0,0,0);
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
 
 </body>
 </html>
