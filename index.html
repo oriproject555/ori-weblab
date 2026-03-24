@@ -1468,7 +1468,7 @@
       <a href="demo-1-mitzpe-hair.html" target="_blank" class="portfolio-card portfolio-card-1 reveal reveal-delay-1">
         <div class="portfolio-bg">
           <div class="portfolio-iframe-wrap">
-            <iframe src="demo-1-mitzpe-hair.html" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+            <iframe src="demo-1-mitzpe-hair.html" scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <div class="portfolio-iframe-dim"></div>
         </div>
@@ -1488,7 +1488,7 @@
       <a href="demo-2-plumber-landing.html" target="_blank" class="portfolio-card portfolio-card-2 reveal reveal-delay-2">
         <div class="portfolio-bg">
           <div class="portfolio-iframe-wrap">
-            <iframe src="demo-2-plumber-landing.html" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+            <iframe src="demo-2-plumber-landing.html" scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <div class="portfolio-iframe-dim"></div>
         </div>
@@ -1508,7 +1508,7 @@
       <a href="demo-3-accountant.html" target="_blank" class="portfolio-card portfolio-card-3 reveal reveal-delay-3">
         <div class="portfolio-bg">
           <div class="portfolio-iframe-wrap">
-            <iframe src="demo-3-accountant.html" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+            <iframe src="demo-3-accountant.html" scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <div class="portfolio-iframe-dim"></div>
         </div>
@@ -1528,7 +1528,7 @@
       <a href="demo-4-restaurant.html" target="_blank" class="portfolio-card portfolio-card-4 reveal reveal-delay-4">
         <div class="portfolio-bg">
           <div class="portfolio-iframe-wrap">
-            <iframe src="demo-4-restaurant.html" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+            <iframe src="demo-4-restaurant.html" scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <div class="portfolio-iframe-dim"></div>
         </div>
@@ -1548,7 +1548,7 @@
       <a href="demo-5-fitness.html" target="_blank" class="portfolio-card portfolio-card-5 reveal" style="transition-delay:0.5s">
         <div class="portfolio-bg">
           <div class="portfolio-iframe-wrap">
-            <iframe src="demo-5-fitness.html" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+            <iframe src="demo-5-fitness.html" scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <div class="portfolio-iframe-dim"></div>
         </div>
@@ -2102,19 +2102,23 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function() {
-  // Skip Three.js on mobile/tablet or if WebGL not supported
-  if (window.innerWidth <= 768) return;
-  if (!window.WebGLRenderingContext) return;
+  // Do not load Three.js at all on mobile/tablet
+  if (window.innerWidth <= 900 || !window.WebGLRenderingContext) return;
 
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.onload = function() { initThree(); };
+  document.head.appendChild(s);
+
+  function initThree() {
   const canvas = document.getElementById('three-canvas');
   const section = document.getElementById('hero');
 
   let renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
   } catch(e) { return; }
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   const scene = new THREE.Scene();
@@ -2180,6 +2184,7 @@
     renderer.render(scene, camera);
   }
   animate();
+  } // end initThree
 })();
 </script>
 
