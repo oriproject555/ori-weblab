@@ -1145,11 +1145,26 @@
     #scroll-top.show { display: flex; }
 
     /* ─── Responsive ───────────────────────────────────────────────── */
+    /* ─── Mobile: הסרת iframes כבדים ─────────────────────────────── */
     @media (max-width: 900px) {
       .about-grid { grid-template-columns: 1fr; }
       .about-visual { display: none; }
       .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .footer-links { gap: 2.5rem; }
+
+      /* מסתיר את ה-iframes לחלוטין במובייל — מונע קריסת זיכרון */
+      .portfolio-iframe-wrap { display: none; }
+
+      /* רקע גרדיאנט חלופי לכרטיסי פורטפוליו */
+      .portfolio-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(0,120,212,0.12) 0%, rgba(0,0,0,0.6) 100%);
+      }
+
+      /* three-canvas מוסתר גם ב-CSS כגיבוי */
+      #three-canvas { display: none; }
     }
 
     @media (max-width: 768px) {
@@ -1941,6 +1956,14 @@
   }, { passive: true });
 
   scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ── הסרת iframes במובייל למניעת קריסה ─────────────────────────── */
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('.portfolio-iframe-wrap iframe').forEach(function(iframe) {
+      iframe.removeAttribute('src');
+      iframe.remove();
+    });
+  }
 
   /* ── Mobile menu ────────────────────────────────────────────────── */
   const toggle = document.getElementById('mobileToggle');
