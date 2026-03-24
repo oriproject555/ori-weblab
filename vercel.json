@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/demo-1", "dest": "/demo-1-mitzpe-hair.html" },
+    { "src": "/demo-2", "dest": "/demo-2-plumber-landing.html" },
+    { "src": "/demo-3", "dest": "/demo-3-accountant.html" },
+    { "src": "/demo-4", "dest": "/demo-4-restaurant.html" },
+    { "src": "/demo-5", "dest": "/demo-5-fitness.html" }
+  ]
+}
