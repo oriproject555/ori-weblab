@@ -2105,9 +2105,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function() {
+  // Skip Three.js on mobile/tablet or if WebGL not supported
+  if (window.innerWidth <= 768) return;
+  if (!window.WebGLRenderingContext) return;
+
   const canvas = document.getElementById('three-canvas');
   const section = document.getElementById('hero');
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
+  } catch(e) { return; }
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
