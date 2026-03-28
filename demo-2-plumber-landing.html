@@ -44,10 +44,10 @@
 
     /* ── DEMO BANNER ── */
     .demo-banner {
-      background: #C9A84C;
+      background: linear-gradient(90deg, #C9A84C, #e8c06a, #C9A84C);
       color: #0D0F14;
       text-align: center;
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1rem;
       font-size: 0.85rem;
       font-weight: 600;
       position: fixed;
@@ -58,12 +58,13 @@
       color: #0D0F14;
       text-decoration: underline;
       margin-right: 0.5rem;
+      font-weight: 700;
     }
 
     /* ── TOP BAR ── */
     .topbar {
-      background: var(--accent);
-      padding: 0.5rem 0;
+      background: linear-gradient(90deg, var(--accent), #1a8fe8);
+      padding: 0.55rem 0;
       position: fixed;
       top: 38px; left: 0; right: 0;
       z-index: 200;
@@ -80,13 +81,15 @@
       align-items: center;
       gap: 0.5rem;
       background: rgba(255,255,255,0.15);
-      padding: 0.2rem 0.75rem;
+      padding: 0.2rem 0.85rem;
       border-radius: 20px;
     }
-    .topbar-phone {
+    .topbar-label {
       font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.18);
+      padding: 0.2rem 0.85rem;
+      border-radius: 20px;
     }
 
     /* ── NAV ── */
@@ -96,8 +99,10 @@
       z-index: 100;
       background: rgba(10,14,20,0.95);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 0.9rem 0;
+      transition: background 0.3s;
     }
     .nav-inner {
       display: flex;
@@ -120,22 +125,35 @@
       font-weight: 500;
       color: var(--muted);
       transition: color 0.25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; right: 0;
+      width: 0; height: 1px;
+      background: var(--accent2);
+      transition: width 0.3s ease;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
     .emergency-btn {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--orange), #f08c30);
       color: white;
-      padding: 0.55rem 1.2rem;
+      padding: 0.6rem 1.3rem;
       border-radius: 6px;
       font-weight: 700;
       font-size: 0.88rem;
-      transition: background 0.25s, transform 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
       animation: pulse-orange 2s infinite;
     }
-    .emergency-btn:hover { background: #f08c30; transform: translateY(-1px); }
+    .emergency-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(224,123,26,0.5);
+    }
 
     @keyframes pulse-orange {
       0%, 100% { box-shadow: 0 0 0 0 rgba(224,123,26,0.5); }
@@ -159,8 +177,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 75% 50%, rgba(26,127,212,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 10% 70%, rgba(26,127,212,0.04) 0%, transparent 60%);
+        radial-gradient(ellipse 70% 60% at 75% 50%, rgba(26,127,212,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 10% 70%, rgba(26,127,212,0.05) 0%, transparent 60%);
     }
 
     .hero-grid {
@@ -188,8 +206,7 @@
       margin-bottom: 1.5rem;
     }
     .urgency-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--orange);
       animation: blink 1.2s infinite;
@@ -208,24 +225,24 @@
       color: var(--muted);
       margin-bottom: 2rem;
       max-width: 480px;
+      line-height: 1.75;
     }
 
     .hero-guarantees {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.7rem;
       margin-bottom: 2.5rem;
     }
     .guarantee-item {
       display: flex;
       align-items: center;
-      gap: 0.7rem;
+      gap: 0.75rem;
       font-size: 0.93rem;
       color: var(--text);
     }
     .check-icon {
-      width: 20px;
-      height: 20px;
+      width: 22px; height: 22px;
       border-radius: 50%;
       background: rgba(34,197,94,0.15);
       border: 1px solid rgba(34,197,94,0.4);
@@ -256,24 +273,21 @@
       border: 2px solid transparent;
     }
     .btn-blue {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: white;
-      border-color: var(--accent);
+      border-color: transparent;
     }
     .btn-blue:hover {
-      background: var(--accent2);
-      border-color: var(--accent2);
-      box-shadow: 0 0 28px rgba(26,127,212,0.45);
+      box-shadow: 0 0 32px rgba(26,127,212,0.5);
       transform: translateY(-2px);
     }
     .btn-orange {
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--orange), #f08c30);
       color: white;
-      border-color: var(--orange);
+      border-color: transparent;
     }
     .btn-orange:hover {
-      background: #f08c30;
-      box-shadow: 0 0 24px rgba(224,123,26,0.4);
+      box-shadow: 0 0 28px rgba(224,123,26,0.5);
       transform: translateY(-2px);
     }
     .btn-outline {
@@ -291,9 +305,10 @@
     .hero-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 2.5rem 2rem;
       position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
     }
     .hero-card::before {
       content: '';
@@ -301,7 +316,7 @@
       top: -1px; left: -1px; right: -1px;
       height: 3px;
       background: linear-gradient(to right, var(--accent), var(--accent2));
-      border-radius: 18px 18px 0 0;
+      border-radius: 20px 20px 0 0;
     }
     .card-header {
       text-align: center;
@@ -312,15 +327,14 @@
       margin-bottom: 0.3rem;
     }
     .card-header p { color: var(--muted); font-size: 0.88rem; }
-    .form-field {
-      margin-bottom: 1rem;
-    }
+    .form-field { margin-bottom: 1rem; }
     .form-field label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.04em;
     }
     .form-field input,
     .form-field select,
@@ -329,33 +343,36 @@
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 0.75rem 1rem;
+      padding: 0.8rem 1rem;
       color: var(--text);
       font-family: 'Heebo', sans-serif;
       font-size: 0.9rem;
-      transition: border-color 0.25s;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      outline: none;
     }
     .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus {
-      outline: none;
+    .form-field select:focus {
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(26,127,212,0.12);
     }
     .form-field input::placeholder { color: var(--muted); }
     .form-submit-full {
       width: 100%;
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--orange), #f08c30);
       color: white;
       border: none;
-      padding: 0.9rem;
+      padding: 0.95rem;
       border-radius: 8px;
       font-family: 'Heebo', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.25s, transform 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .form-submit-full:hover { background: #f08c30; transform: translateY(-1px); }
+    .form-submit-full:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(224,123,26,0.4);
+    }
     .form-note {
       text-align: center;
       font-size: 0.78rem;
@@ -387,18 +404,46 @@
     }
     .trust-icon { font-size: 1.3rem; }
 
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
     /* ── SERVICES ── */
     #services {
       padding: 6rem 0;
+      position: relative;
+    }
+    #services::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--accent), transparent);
+      opacity: 0.2;
     }
     .section-label {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent2);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 18px; height: 1px;
+      background: var(--accent2);
     }
     .section-title {
       font-size: clamp(1.8rem, 3.2vw, 2.5rem);
@@ -410,48 +455,51 @@
       color: var(--muted);
       max-width: 520px;
       margin-bottom: 3rem;
+      line-height: 1.75;
     }
 
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+      gap: 1.3rem;
     }
     .service-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.8rem 1.5rem;
-      transition: border-color 0.3s, transform 0.3s;
-      cursor: default;
+      border-radius: 14px;
+      padding: 1.9rem 1.6rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
     }
-    .service-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
     }
-    .service-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+    .service-card:hover { border-color: rgba(26,127,212,0.4); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { font-size: 2.2rem; margin-bottom: 1.1rem; }
     .service-name {
       font-family: 'Frank Ruhl Libre', serif;
       font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
-    .service-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    .service-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
     .service-time {
-      margin-top: 1rem;
+      margin-top: 1.1rem;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent2);
       background: rgba(26,127,212,0.1);
+      border: 1px solid rgba(26,127,212,0.2);
       display: inline-block;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.65rem;
       border-radius: 4px;
     }
 
@@ -459,6 +507,15 @@
     #why {
       padding: 6rem 0;
       background: var(--surface);
+      position: relative;
+    }
+    #why::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--accent), transparent);
+      opacity: 0.15;
     }
     .why-grid {
       display: grid;
@@ -469,7 +526,7 @@
     .why-list {
       display: flex;
       flex-direction: column;
-      gap: 1.4rem;
+      gap: 1.5rem;
       margin-top: 2rem;
     }
     .why-item {
@@ -478,8 +535,7 @@
       align-items: flex-start;
     }
     .why-num {
-      width: 42px;
-      height: 42px;
+      width: 44px; height: 44px;
       border-radius: 10px;
       background: rgba(26,127,212,0.12);
       border: 1px solid var(--border);
@@ -492,51 +548,49 @@
       color: var(--accent2);
       flex-shrink: 0;
     }
-    .why-item-title {
-      font-weight: 700;
-      font-size: 0.98rem;
-      margin-bottom: 0.3rem;
-    }
-    .why-item-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
+    .why-item-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.3rem; }
+    .why-item-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
     .why-visual {
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .big-phone {
-      font-size: 5rem;
-      margin-bottom: 1rem;
+    .why-visual::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
     }
-    .why-visual h3 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-    .why-visual p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-    .phone-number {
+    .big-icon { font-size: 4.5rem; margin-bottom: 1rem; }
+    .why-visual h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .why-visual p { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    .cta-label {
       font-family: 'Frank Ruhl Libre', serif;
-      font-size: 2.2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--accent2);
       display: block;
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
     }
     .available-now {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       color: var(--green);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
     }
     .green-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--green);
       animation: blink 1.5s infinite;
@@ -560,15 +614,15 @@
       right: 12%;
       left: 12%;
       height: 1px;
-      background: var(--border);
+      background: linear-gradient(to left, transparent, var(--accent), transparent);
+      opacity: 0.3;
     }
     .step {
       text-align: center;
       position: relative;
     }
     .step-circle {
-      width: 60px;
-      height: 60px;
+      width: 62px; height: 62px;
       border-radius: 50%;
       background: var(--surface);
       border: 2px solid var(--accent);
@@ -579,9 +633,14 @@
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--accent2);
-      margin: 0 auto 1.2rem;
+      margin: 0 auto 1.4rem;
       position: relative;
       z-index: 1;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .step:hover .step-circle {
+      background: rgba(26,127,212,0.15);
+      box-shadow: 0 0 24px rgba(26,127,212,0.3);
     }
     .step-title {
       font-family: 'Frank Ruhl Libre', serif;
@@ -589,7 +648,7 @@
       font-weight: 700;
       margin-bottom: 0.4rem;
     }
-    .step-desc { font-size: 0.84rem; color: var(--muted); }
+    .step-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
 
     /* ── TESTIMONIALS ── */
     #testimonials {
@@ -605,17 +664,23 @@
     .testimonial-card {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.8rem;
+      transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .stars { color: #fbbf24; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 1rem; }
-    .testimonial-text { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.2rem; }
-    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .testimonial-card:hover { border-color: rgba(26,127,212,0.4); transform: translateY(-3px); }
+    .stars { color: #fbbf24; font-size: 0.9rem; letter-spacing: 2px; }
+    .testimonial-text { color: var(--muted); font-size: 0.92rem; line-height: 1.7; flex: 1; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
     .avatar {
-      width: 38px; height: 38px; border-radius: 50%;
+      width: 40px; height: 40px; border-radius: 50%;
       background: rgba(26,127,212,0.15);
+      border: 1px solid rgba(26,127,212,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.88rem; color: var(--accent2);
+      font-weight: 700; font-size: 0.9rem; color: var(--accent2);
       flex-shrink: 0;
     }
     .author-name { font-weight: 600; font-size: 0.9rem; }
@@ -628,8 +693,8 @@
     .cta-box {
       background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 4rem 3rem;
+      border-radius: 22px;
+      padding: 4.5rem 3rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -641,9 +706,16 @@
       height: 3px;
       background: linear-gradient(to right, var(--orange), var(--accent), var(--accent2));
     }
-    .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
-    .cta-box p { color: var(--muted); margin-bottom: 2.5rem; max-width: 460px; margin-inline: auto; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(26,127,212,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1rem; position: relative; z-index: 1; }
+    .cta-box p { color: var(--muted); margin-bottom: 2.5rem; max-width: 460px; margin-inline: auto; position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 
     /* ── FOOTER ── */
     footer {
@@ -664,10 +736,7 @@
       font-weight: 700;
     }
     .footer-logo .accent { color: var(--accent2); }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a {
       font-size: 0.83rem;
       color: var(--muted);
@@ -711,8 +780,8 @@
       <span class="urgency-dot"></span>
       זמינים עכשיו לחירום 24/7
     </div>
-    <div class="topbar-phone">📞 צרו קשר</div>
-    <div>מרכז ⟨ ₪ גוש דן ₪ ⟩</div>
+    <div class="topbar-label">⚡ שרברב אקספרס</div>
+    <div>גוש דן ✓</div>
   </div>
 </div>
 
@@ -726,7 +795,7 @@
       <a href="#process">תהליך</a>
       <a href="#testimonials">המלצות</a>
     </div>
-    <a href="tel:" class="emergency-btn">🚨 חירום עכשיו</a>
+    <a href="#hero" class="emergency-btn">🚨 קבע ביקור</a>
   </div>
 </nav>
 
@@ -767,8 +836,8 @@
           </div>
         </div>
         <div class="hero-cta-group">
-          <a href="tel:" class="btn btn-orange">📞 חירום</a>
-          <a href="#contact" class="btn btn-outline">קבע תור רגיל</a>
+          <a href="#hero" class="btn btn-orange">⚡ קבע ביקור עכשיו</a>
+          <a href="#services" class="btn btn-outline">השירותים שלנו</a>
         </div>
       </div>
 
@@ -781,10 +850,6 @@
           <div class="form-field">
             <label>שם מלא</label>
             <input type="text" placeholder="ישראל ישראלי">
-          </div>
-          <div class="form-field">
-            <label>טלפון</label>
-            <input type="tel" placeholder="050-000-0000">
           </div>
           <div class="form-field">
             <label>סוג הבעיה</label>
@@ -826,41 +891,43 @@
 <!-- Services -->
 <section id="services">
   <div class="container">
-    <span class="section-label">מה אנחנו עושים</span>
-    <h2 class="section-title">השירותים שלנו</h2>
-    <p class="section-sub">פתרונות אינסטלציה מקצועיים לכל בעיה – מתיקונים קטנים ועד פרויקטים גדולים.</p>
+    <div class="reveal">
+      <span class="section-label">מה אנחנו עושים</span>
+      <h2 class="section-title">השירותים שלנו</h2>
+      <p class="section-sub">פתרונות אינסטלציה מקצועיים לכל בעיה – מתיקונים קטנים ועד פרויקטים גדולים.</p>
+    </div>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card reveal reveal-d1">
         <div class="service-icon">🚰</div>
         <div class="service-name">תיקון צינורות</div>
         <p class="service-desc">פיצוץ צינורות, נזילות, חיבורים רופפים. תיקון מיידי עם חומרים איכותיים.</p>
         <span class="service-time">⚡ שירות חירום זמין</span>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d2">
         <div class="service-icon">🚿</div>
         <div class="service-name">פתיחת סתימות</div>
         <p class="service-desc">סתימות בכיור, אסלה, מקלחת וביוב. ציוד מתקדם לפתרון מהיר ויעיל.</p>
         <span class="service-time">⚡ שירות חירום זמין</span>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d3">
         <div class="service-icon">🔥</div>
         <div class="service-name">דוד שמש ובוילר</div>
         <p class="service-desc">תיקון, החלפה והתקנה של דודי שמש, בוילרים ומערכות חימום מים.</p>
         <span class="service-time">📅 לפי תור</span>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d1">
         <div class="service-icon">🔧</div>
         <div class="service-name">אינסטלציה חדשה</div>
         <p class="service-desc">התקנת מטבח, אמבטיה, כיור ובאתרים חדשים. פרויקטים מא' עד ת'.</p>
         <span class="service-time">📅 לפי תור</span>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d2">
         <div class="service-icon">💧</div>
         <div class="service-name">גילוי נזילות</div>
         <p class="service-desc">איתור נזילות נסתרות בקירות ותקרות עם ציוד אלקטרוני ללא פיצוץ.</p>
         <span class="service-time">📅 לפי תור</span>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d3">
         <div class="service-icon">🌿</div>
         <div class="service-name">מערכות השקיה</div>
         <p class="service-desc">תכנון, התקנה ותיקון של מערכות השקיה לגינות, מרפסות ועסקים.</p>
@@ -874,10 +941,10 @@
 <section id="why">
   <div class="container">
     <div class="why-grid">
-      <div>
+      <div class="reveal">
         <span class="section-label">למה לבחור בנו</span>
         <h2 class="section-title">לא כל שרברב הוא שרברב אקספרס</h2>
-        <p style="color: var(--muted); margin-bottom: 0.5rem;">12 שנות ניסיון בגוש דן. מאות לקוחות חוזרים. אנחנו עושים את העבודה נכון בפעם הראשונה.</p>
+        <p style="color: var(--muted); margin-bottom: 0.5rem; line-height:1.75;">12 שנות ניסיון בגוש דן. מאות לקוחות חוזרים. אנחנו עושים את העבודה נכון בפעם הראשונה.</p>
         <div class="why-list">
           <div class="why-item">
             <div class="why-num">01</div>
@@ -909,11 +976,14 @@
           </div>
         </div>
       </div>
-      <div class="why-visual">
-        <div class="big-phone">📞</div>
+      <div class="why-visual reveal reveal-d2">
+        <div class="big-icon">⚡</div>
         <h3>בעיה דחופה?</h3>
         <p>זמינים עכשיו. מגיבים תוך דקות.</p>
-        <span class="phone-number">התקשרו אלינו</span>
+        <span class="cta-label">קבע ביקור מיידי</span>
+        <div>
+          <a href="#hero" class="btn btn-blue" style="margin-bottom:1rem;width:100%;justify-content:center;">קבע ביקור ⚡</a>
+        </div>
         <div class="available-now">
           <span class="green-dot"></span>
           זמינים עכשיו – 24/7
@@ -926,26 +996,28 @@
 <!-- Process -->
 <section id="process">
   <div class="container" style="text-align:center;">
-    <span class="section-label">איך זה עובד</span>
-    <h2 class="section-title">4 צעדים פשוטים</h2>
-    <p class="section-sub" style="margin-inline:auto;">מהפנייה ועד לתיקון – הכל פשוט, מהיר ושקוף.</p>
+    <div class="reveal">
+      <span class="section-label" style="justify-content:center;">איך זה עובד</span>
+      <h2 class="section-title">4 צעדים פשוטים</h2>
+      <p class="section-sub" style="margin-inline:auto;">מהפנייה ועד לתיקון – הכל פשוט, מהיר ושקוף.</p>
+    </div>
     <div class="process-steps">
-      <div class="step">
+      <div class="step reveal reveal-d1">
         <div class="step-circle">1</div>
         <div class="step-title">פנייה</div>
-        <div class="step-desc">התקשר/י או מלא/י טופס. נענה תוך דקות.</div>
+        <div class="step-desc">מלא/י טופס. נענה תוך דקות.</div>
       </div>
-      <div class="step">
+      <div class="step reveal reveal-d2">
         <div class="step-circle">2</div>
         <div class="step-title">אומדן</div>
         <div class="step-desc">נסביר מה הבעיה ונציג מחיר ברור מראש.</div>
       </div>
-      <div class="step">
+      <div class="step reveal reveal-d3">
         <div class="step-circle">3</div>
         <div class="step-title">הגעה</div>
         <div class="step-desc">מגיעים תוך 45 דקות עם כל הציוד הנדרש.</div>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-circle">4</div>
         <div class="step-title">פתרון</div>
         <div class="step-desc">תיקון מקצועי + אחריות שנה על העבודה.</div>
@@ -957,10 +1029,12 @@
 <!-- Testimonials -->
 <section id="testimonials">
   <div class="container">
-    <span class="section-label">לקוחות מרוצים</span>
-    <h2 class="section-title">מה הם אומרים עלינו</h2>
+    <div class="reveal" style="text-align:center; margin-bottom:1rem;">
+      <span class="section-label" style="justify-content:center;">לקוחות מרוצים</span>
+      <h2 class="section-title">מה הם אומרים עלינו</h2>
+    </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal reveal-d1">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"צינור פרץ לי ב-11 בלילה. התקשרתי ותוך 40 דקות כבר היה אצלי. תיקן, ניקה והכל היה מסודר. מחיר הוגן, שירות מדהים!"</p>
         <div class="testimonial-author">
@@ -971,7 +1045,7 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal reveal-d2">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"גיליתי נזילה בקיר. הוא מצא אותה ב-20 דקות בלי לפצוץ כלום, תיקן ויצא. שרברבים אחרים רצו לפצוץ כל הקיר. ממליצה מאוד!"</p>
         <div class="testimonial-author">
@@ -982,7 +1056,7 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal reveal-d3">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">"עשה לנו אינסטלציה שלמה לדירה משופצת. עבד בדייקנות, עמד בלוחות הזמנים ובמחיר המוסכם. בונה על הוא גם לדירה הבאה."</p>
         <div class="testimonial-author">
@@ -1000,13 +1074,13 @@
 <!-- CTA -->
 <section id="cta">
   <div class="container">
-    <div class="cta-box">
-      <span class="section-label">מוכן/ה לפתרון?</span>
+    <div class="cta-box reveal">
+      <span class="section-label" style="justify-content:center;">מוכן/ה לפתרון?</span>
       <h2>אל תמתין/י עם בעיה באינסטלציה</h2>
-      <p>כל דקה שמחכים – הנזק גדל. התקשר/י עכשיו לשירות מהיר ומקצועי.</p>
+      <p>כל דקה שמחכים – הנזק גדל. שלח/י פנייה עכשיו לשירות מהיר ומקצועי.</p>
       <div class="cta-btns">
-        <a href="tel:" class="btn btn-orange">📞 התקשר/י עכשיו</a>
-        <a href="https://wa.me/" class="btn btn-blue">💬 WhatsApp</a>
+        <a href="#hero" class="btn btn-orange">⚡ קבע ביקור עכשיו</a>
+        <a href="#hero" class="btn btn-blue">💬 השאר פרטים</a>
       </div>
     </div>
   </div>
@@ -1024,13 +1098,19 @@
       </div>
     </div>
     <p class="footer-copy">
-      © 2024 שרברב אקספרס. כל הזכויות שמורות. |
+      © 2025 שרברב אקספרס. כל הזכויות שמורות. |
       <a href="Ori WebLab – סטודיו לפיתוח אתרים.html">בניית האתר: Ori WebLab</a>
     </p>
   </div>
 </footer>
 
 <script>
+// Reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
 // ── שרברב אקספרס: Rising Water Bubbles ──
 (function() {
   const canvas = document.getElementById('three-canvas');

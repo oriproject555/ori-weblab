@@ -25,19 +25,19 @@
     ul { list-style: none; }
     .container { width: min(1100px, 92vw); margin-inline: auto; }
 
-    .demo-banner { background: #C9A84C; color: #0D0F14; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; }
+    .demo-banner { background: linear-gradient(90deg, #C9A84C, #e8c06a, #C9A84C); color: #0D0F14; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; }
     .demo-banner a { color: #0D0F14; text-decoration: underline; margin-right: 0.5rem; }
 
-    nav { position: fixed; top: 38px; right: 0; left: 0; z-index: 100; padding: 1.2rem 0; background: rgba(7,9,12,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); transition: background 0.3s; }
-    nav.scrolled { background: rgba(7,9,12,0.97); }
+    nav { position: fixed; top: 38px; right: 0; left: 0; z-index: 100; padding: 1.2rem 0; background: rgba(7,9,12,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); transition: background 0.3s, box-shadow 0.3s; }
+    nav.scrolled { background: rgba(7,9,12,0.97); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: 'Frank Ruhl Libre', serif; font-size: 1.4rem; font-weight: 700; }
     .nav-logo span { color: var(--accent2); }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); transition: color 0.25s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-btn { background: var(--accent); color: var(--bg); padding: 0.55rem 1.4rem; border-radius: 5px; font-weight: 600; font-size: 0.88rem; transition: background 0.25s, transform 0.25s; }
-    .nav-btn:hover { background: var(--accent2); transform: translateY(-1px); }
+    .nav-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--bg); padding: 0.55rem 1.4rem; border-radius: 5px; font-weight: 600; font-size: 0.88rem; transition: all 0.25s; box-shadow: 0 2px 12px rgba(255,85,51,0.35); }
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,85,51,0.5); }
     .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
     .nav-mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
 
@@ -52,8 +52,8 @@
     .hero-sub { font-size: 1.1rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 500px; }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; border-radius: 6px; font-family: 'Heebo', sans-serif; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
-    .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); box-shadow: 0 0 24px rgba(255,85,51,0.4); transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--bg); border-color: transparent; box-shadow: 0 4px 16px rgba(255,85,51,0.35); }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(255,85,51,0.55); transform: translateY(-2px); }
     .btn-outline { background: transparent; color: var(--text); border-color: rgba(240,237,232,0.3); }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     .hero-stats { display: flex; gap: 3rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
@@ -65,11 +65,15 @@
     .section-sub { font-size: 1rem; color: var(--muted); max-width: 520px; margin-bottom: 3rem; }
     .accent-line { width: 48px; height: 2px; background: linear-gradient(to left, var(--accent2), transparent); margin-bottom: 3rem; }
 
-    #programs { padding: 7rem 0; }
+    #programs { padding: 7rem 0; position: relative; }
+    #programs::before { content: ''; display: block; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to left, transparent, var(--accent2), transparent); opacity: 0.2; }
     .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: start; }
-    .program-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem 1.8rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; }
+    .program-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem 1.8rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+    .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to left, var(--accent2), var(--accent)); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; }
     .program-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(255,85,51,0.12); }
+    .program-card:hover::before { transform: scaleX(1); }
     .program-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,85,51,0.15); }
+    .program-card.featured::before { transform: scaleX(1); }
     .featured-badge { position: absolute; top: -14px; right: 50%; transform: translateX(50%); background: var(--accent); color: var(--bg); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 1rem; border-radius: 20px; white-space: nowrap; }
     .program-icon { font-size: 2.2rem; margin-bottom: 1rem; }
     .program-name { font-family: 'Frank Ruhl Libre', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
@@ -81,7 +85,8 @@
     .program-card.featured .program-btn { background: var(--accent); border-color: var(--accent); color: var(--bg); }
     .program-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
-    #about { padding: 7rem 0; background: var(--surface); }
+    #about { padding: 7rem 0; background: var(--surface); position: relative; }
+    #about::before { content: ''; display: block; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to left, transparent, var(--accent2), transparent); opacity: 0.2; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-visual { position: relative; }
     .about-box { aspect-ratio: 3/4; border-radius: 16px; background: linear-gradient(145deg, #1a1010 0%, #0a0707 100%); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
@@ -98,10 +103,13 @@
     .about-list li { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
     .about-list li::before { content: '✦'; color: var(--accent2); font-size: 0.7rem; flex-shrink: 0; }
 
-    #results { padding: 7rem 0; }
+    #results { padding: 7rem 0; position: relative; }
+    #results::before { content: ''; display: block; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to left, transparent, var(--accent2), transparent); opacity: 0.2; }
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; transition: border-color 0.3s; }
-    .testimonial-card:hover { border-color: var(--accent); }
+    .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; position: relative; overflow: hidden; }
+    .testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to left, var(--accent2), var(--accent)); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; }
+    .testimonial-card:hover { border-color: var(--accent); box-shadow: 0 8px 32px rgba(255,85,51,0.15); transform: translateY(-3px); }
+    .testimonial-card:hover::before { transform: scaleX(1); }
     .result-badge { display: inline-block; background: rgba(255,85,51,0.1); color: var(--accent2); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 20px; margin-bottom: 1rem; }
     .stars { color: var(--accent2); font-size: 0.9rem; margin-bottom: 0.8rem; letter-spacing: 2px; }
     .testimonial-text { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.4rem; font-style: italic; }
@@ -110,11 +118,14 @@
     .author-name { font-weight: 600; font-size: 0.92rem; }
     .author-role { font-size: 0.78rem; color: var(--muted); }
 
-    #booking { padding: 7rem 0; background: var(--surface); }
-    .booking-box { background: linear-gradient(135deg, var(--bg) 0%, rgba(255,85,51,0.07) 100%); border: 1px solid var(--border); border-radius: 20px; padding: 4rem 3rem; text-align: center; }
-    .booking-box h2 { margin-bottom: 1rem; font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
-    .booking-box p { color: var(--muted); max-width: 460px; margin-inline: auto; margin-bottom: 2.5rem; }
-    .booking-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    #booking { padding: 7rem 0; background: var(--surface); position: relative; }
+    #booking::before { content: ''; display: block; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to left, transparent, var(--accent2), transparent); opacity: 0.2; }
+    .booking-box { background: linear-gradient(135deg, var(--bg) 0%, rgba(255,85,51,0.09) 100%); border: 1px solid var(--border); border-radius: 20px; padding: 4rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .booking-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to left, transparent, var(--accent), var(--accent2), var(--accent), transparent); }
+    .booking-box::after { content: ''; position: absolute; top: 50%; left: 50%; width: 500px; height: 500px; transform: translate(-50%, -50%); background: radial-gradient(ellipse, rgba(255,85,51,0.06) 0%, transparent 70%); pointer-events: none; }
+    .booking-box h2 { margin-bottom: 1rem; font-size: clamp(1.8rem, 3.5vw, 2.6rem); position: relative; z-index: 1; }
+    .booking-box p { color: var(--muted); max-width: 460px; margin-inline: auto; margin-bottom: 2.5rem; position: relative; z-index: 1; }
+    .booking-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3rem 0 2rem; }
     .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
@@ -126,6 +137,9 @@
 
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
 
     @media (max-width: 768px) {
       .nav-links, .nav-btn { display: none; }
@@ -214,7 +228,7 @@
       <div class="accent-line"></div>
     </div>
     <div class="programs-grid">
-      <div class="program-card reveal">
+      <div class="program-card reveal reveal-d1">
         <div class="program-icon">💪</div>
         <div class="program-name">בסיס וכוח</div>
         <div class="program-desc">למתחילים ומתקדמים. בניית שריר, שיפור כוח, יציבה ואיזון גופני.</div>
@@ -222,7 +236,7 @@
         <div class="program-price">₪600 <span>/ חודש</span></div>
         <a href="#booking" class="program-btn">בחר תוכנית</a>
       </div>
-      <div class="program-card featured reveal">
+      <div class="program-card featured reveal reveal-d2">
         <div class="featured-badge">🔥 הכי פופולרי</div>
         <div class="program-icon">🏆</div>
         <div class="program-name">טרנספורמציה מלאה</div>
@@ -231,7 +245,7 @@
         <div class="program-price">₪900 <span>/ חודש</span></div>
         <a href="#booking" class="program-btn">בחר תוכנית</a>
       </div>
-      <div class="program-card reveal">
+      <div class="program-card reveal reveal-d3">
         <div class="program-icon">🔥</div>
         <div class="program-name">ירידה במשקל</div>
         <div class="program-desc">שריפת שומן וחיטוב מוכחים. שילוב תוכנית תזונה + אימון קרדיו וכוח.</div>
@@ -281,7 +295,7 @@
       <div class="accent-line" style="margin-inline:auto;"></div>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card reveal reveal-d1">
         <div class="result-badge">📉 ירידה של 18 ק״ג</div>
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">״ירדתי 18 ק״ג תוך 4 חודשים! יובל שינה את חיי. הגישה המקצועית והסבלנות שלו עשו את כל ההבדל.״</p>
@@ -290,7 +304,7 @@
           <div><div class="author-name">רועי מזרחי</div><div class="author-role">תוכנית ירידה במשקל</div></div>
         </div>
       </div>
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card reveal reveal-d2">
         <div class="result-badge">💪 הוספת 8 ק״ג שריר</div>
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">״הגוף שרציתי תמיד – עכשיו זה מציאות. תוכנית הטרנספורמציה הייתה מאתגרת אבל התוצאות מדברות בעד עצמן.״</p>
@@ -299,7 +313,7 @@
           <div><div class="author-name">נועה שפירא</div><div class="author-role">תוכנית טרנספורמציה מלאה</div></div>
         </div>
       </div>
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card reveal reveal-d3">
         <div class="result-badge">🏋️ שיפור כוח 40%</div>
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">״מקצועי, סבלני, ומוביל לתוצאות. ב-3 חודשים הכפלתי את המשקולות שאני מרים. ממליץ בחום לכולם!״</p>
@@ -318,8 +332,8 @@
       <h2>אימון ניסיון ראשון – בחינם</h2>
       <p>קבעו איתנו שיחת ייעוץ ואימון ניסיון ללא עלות וללא התחייבות. בואו לראות בעצמכם מה זה אימון אישי אמיתי.</p>
       <div class="booking-btns">
-        <a href="tel:" class="btn btn-primary">📞 התקשרו אלינו</a>
-        <a href="https://wa.me/" class="btn btn-outline">💬 וואטסאפ</a>
+        <a href="#programs" class="btn btn-primary">💪 בחר תוכנית</a>
+        <a href="#about" class="btn btn-outline">👤 אודות המאמן</a>
       </div>
     </div>
   </div>
@@ -333,9 +347,7 @@
         <div class="footer-tagline">מאמן אישי מוסמך | יובל כהן</div>
       </div>
       <div class="footer-info">
-        <div>📍 כתובת</div>
         <div>⏰ א׳–ו׳: 06:00–22:00</div>
-        <div>📞 טלפון</div>
       </div>
     </div>
     <div class="footer-copy">

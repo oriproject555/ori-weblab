@@ -44,10 +44,10 @@
 
     /* ── DEMO BANNER ── */
     .demo-banner {
-      background: #C9A84C;
+      background: linear-gradient(90deg, #C9A84C, #e8c06a, #C9A84C);
       color: #0D0F14;
       text-align: center;
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1rem;
       font-size: 0.85rem;
       font-weight: 600;
       position: fixed;
@@ -58,6 +58,7 @@
       color: #0D0F14;
       text-decoration: underline;
       margin-right: 0.5rem;
+      font-weight: 700;
     }
 
     /* ── NAV ── */
@@ -67,9 +68,12 @@
       z-index: 100;
       background: rgba(8,9,13,0.92);
       backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
       padding: 1.1rem 0;
+      transition: background 0.3s;
     }
+    nav.scrolled { background: rgba(8,9,13,0.98); }
     .nav-inner {
       display: flex;
       align-items: center;
@@ -82,37 +86,44 @@
     }
     .nav-logo span { color: var(--accent2); }
     .nav-subtitle {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--muted);
       font-weight: 400;
       display: block;
       letter-spacing: 0.08em;
       font-family: 'Heebo', sans-serif;
     }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
+    .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
       font-size: 0.87rem;
       font-weight: 500;
       color: var(--muted);
       transition: color 0.25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; right: 0;
+      width: 0; height: 1px;
+      background: var(--accent2);
+      transition: width 0.3s ease;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
     .nav-cta {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: white;
-      padding: 0.55rem 1.3rem;
+      padding: 0.6rem 1.4rem;
       border-radius: 6px;
       font-weight: 600;
       font-size: 0.87rem;
-      transition: background 0.25s, transform 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
 
     /* ── HERO ── */
     #hero {
@@ -122,7 +133,7 @@
       padding-top: 120px;
       position: relative;
       overflow: hidden;
-      background-image: linear-gradient(rgba(8,9,13,0.78), rgba(8,9,13,0.78)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80');
+      background-image: linear-gradient(rgba(8,9,13,0.8), rgba(8,9,13,0.8)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80');
       background-size: cover;
       background-position: center;
     }
@@ -131,15 +142,14 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 65% 55% at 70% 40%, rgba(37,99,235,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 65% at 15% 70%, rgba(13,148,136,0.05) 0%, transparent 60%);
+        radial-gradient(ellipse 65% 55% at 70% 40%, rgba(37,99,235,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 65% at 15% 70%, rgba(13,148,136,0.06) 0%, transparent 60%);
     }
 
-    /* Decorative grid lines */
     .hero-grid-lines {
       position: absolute;
       inset: 0;
-      opacity: 0.03;
+      opacity: 0.025;
       background-image:
         linear-gradient(var(--text) 1px, transparent 1px),
         linear-gradient(90deg, var(--text) 1px, transparent 1px);
@@ -169,8 +179,7 @@
       letter-spacing: 0.06em;
     }
     .cred-divider {
-      width: 1px;
-      height: 12px;
+      width: 1px; height: 12px;
       background: rgba(37,99,235,0.35);
     }
 
@@ -187,7 +196,7 @@
       color: var(--muted);
       margin-bottom: 2.5rem;
       max-width: 520px;
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     .hero-btns {
@@ -199,8 +208,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.8rem 1.8rem;
-      border-radius: 6px;
+      padding: 0.85rem 1.8rem;
+      border-radius: 7px;
       font-family: 'Heebo', sans-serif;
       font-weight: 600;
       font-size: 0.95rem;
@@ -209,25 +218,21 @@
       border: 2px solid transparent;
     }
     .btn-blue {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: white;
-      border-color: var(--accent);
+      border-color: transparent;
     }
     .btn-blue:hover {
-      background: var(--accent2);
-      border-color: var(--accent2);
-      box-shadow: 0 0 28px rgba(37,99,235,0.4);
+      box-shadow: 0 0 32px rgba(37,99,235,0.45);
       transform: translateY(-2px);
     }
     .btn-teal {
-      background: var(--teal);
+      background: linear-gradient(135deg, var(--teal), var(--teal2));
       color: white;
-      border-color: var(--teal);
+      border-color: transparent;
     }
     .btn-teal:hover {
-      background: var(--teal2);
-      border-color: var(--teal2);
-      box-shadow: 0 0 24px rgba(13,148,136,0.4);
+      box-shadow: 0 0 28px rgba(13,148,136,0.4);
       transform: translateY(-2px);
     }
     .btn-outline {
@@ -247,28 +252,45 @@
       margin-top: 3.5rem;
       padding-top: 2.5rem;
       border-top: 1px solid rgba(37,99,235,0.15);
+      flex-wrap: wrap;
     }
-    .hero-num-item {}
     .hero-num {
       font-family: 'Frank Ruhl Libre', serif;
       font-size: 2.2rem;
       font-weight: 700;
       color: var(--accent2);
+      line-height: 1;
     }
-    .hero-num-label { font-size: 0.82rem; color: var(--muted); }
+    .hero-num-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; }
 
-    /* ── SERVICES ── */
-    #services {
-      padding: 7rem 0;
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ── SHARED SECTION ── */
     .section-label {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--teal2);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 18px; height: 1px;
+      background: var(--teal2);
     }
     .section-title {
       font-size: clamp(1.8rem, 3.2vw, 2.6rem);
@@ -280,24 +302,38 @@
       color: var(--muted);
       max-width: 520px;
       margin-bottom: 3rem;
+      line-height: 1.75;
     }
     .blue-line {
-      width: 48px;
-      height: 2px;
+      width: 48px; height: 2px;
       background: linear-gradient(to left, var(--accent2), transparent);
       margin-bottom: 3rem;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 7rem 0;
+      position: relative;
+    }
+    #services::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--accent2), transparent);
+      opacity: 0.2;
     }
 
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.3rem;
+      gap: 1.4rem;
     }
     .service-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem 1.7rem;
+      border-radius: 14px;
+      padding: 2.1rem 1.8rem;
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
@@ -309,7 +345,7 @@
       height: 2px;
       background: linear-gradient(to right, var(--accent), var(--teal));
       transform: scaleX(0);
-      transition: transform 0.3s ease;
+      transition: transform 0.35s ease;
     }
     .service-card:hover::before { transform: scaleX(1); }
     .service-card:hover {
@@ -318,14 +354,14 @@
       box-shadow: 0 16px 48px rgba(0,0,0,0.3);
     }
     .service-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
+      width: 50px; height: 50px;
+      border-radius: 11px;
       background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.3rem;
       font-size: 1.4rem;
     }
     .service-name {
@@ -335,15 +371,11 @@
       margin-bottom: 0.5rem;
       color: var(--text);
     }
-    .service-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
+    .service-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
     .service-tag {
       margin-top: 1.2rem;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--teal2);
     }
 
@@ -351,14 +383,22 @@
     #about {
       padding: 7rem 0;
       background: var(--surface);
+      position: relative;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--accent2), transparent);
+      opacity: 0.12;
     }
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
-      align-items: center;
+      align-items: start;
     }
-    .about-text .section-sub { max-width: 100%; }
     .about-highlights {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -368,16 +408,19 @@
     .highlight-card {
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.2rem;
+      border-radius: 12px;
+      padding: 1.3rem;
+      transition: border-color 0.3s;
     }
+    .highlight-card:hover { border-color: rgba(37,99,235,0.35); }
     .highlight-num {
       font-family: 'Frank Ruhl Libre', serif;
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--accent2);
+      line-height: 1;
     }
-    .highlight-label { font-size: 0.82rem; color: var(--muted); }
+    .highlight-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; }
     .team-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -386,21 +429,17 @@
     .team-card {
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.8rem 1.4rem;
       text-align: center;
       transition: border-color 0.3s, transform 0.3s;
     }
-    .team-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
+    .team-card:hover { border-color: var(--accent); transform: translateY(-3px); }
     .team-avatar {
-      width: 64px;
-      height: 64px;
+      width: 64px; height: 64px;
       border-radius: 50%;
       background: rgba(37,99,235,0.12);
-      border: 2px solid var(--border);
+      border: 2px solid rgba(37,99,235,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -417,12 +456,10 @@
       margin-bottom: 0.3rem;
     }
     .team-role { font-size: 0.8rem; color: var(--teal2); font-weight: 600; margin-bottom: 0.5rem; }
-    .team-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .team-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
 
     /* ── INDUSTRIES ── */
-    #industries {
-      padding: 7rem 0;
-    }
+    #industries { padding: 7rem 0; }
     .industries-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -432,15 +469,16 @@
     .industry-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 1.5rem 1.2rem;
       text-align: center;
-      transition: border-color 0.3s, background 0.3s;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
       cursor: default;
     }
     .industry-card:hover {
       border-color: var(--accent);
       background: rgba(37,99,235,0.05);
+      transform: translateY(-3px);
     }
     .industry-icon { font-size: 2rem; margin-bottom: 0.7rem; }
     .industry-name { font-size: 0.92rem; font-weight: 600; color: var(--text); }
@@ -468,10 +506,8 @@
     }
     .timeline-dot {
       position: absolute;
-      top: 4px;
-      right: -8px;
-      width: 18px;
-      height: 18px;
+      top: 4px; right: -8px;
+      width: 18px; height: 18px;
       border-radius: 50%;
       background: var(--accent);
       border: 3px solid var(--bg);
@@ -493,16 +529,10 @@
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
-    .timeline-desc { font-size: 0.9rem; color: var(--muted); max-width: 500px; }
-    .process-cta {
-      margin-top: 2rem;
-      padding-right: 3.5rem;
-    }
+    .timeline-desc { font-size: 0.9rem; color: var(--muted); max-width: 500px; line-height: 1.65; }
 
     /* ── FAQ ── */
-    #faq {
-      padding: 7rem 0;
-    }
+    #faq { padding: 7rem 0; }
     .faq-list {
       margin-top: 3rem;
       display: flex;
@@ -513,9 +543,11 @@
     .faq-item {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
+      transition: border-color 0.3s;
     }
+    .faq-item:hover { border-color: rgba(37,99,235,0.35); }
     .faq-q {
       padding: 1.2rem 1.5rem;
       font-weight: 700;
@@ -528,7 +560,7 @@
       transition: background 0.25s;
     }
     .faq-q:hover { background: rgba(37,99,235,0.05); }
-    .faq-q::after { content: '+'; color: var(--accent2); font-size: 1.3rem; font-weight: 300; }
+    .faq-q::after { content: '+'; color: var(--accent2); font-size: 1.4rem; font-weight: 300; }
     .faq-a {
       padding: 0 1.5rem 1.2rem;
       color: var(--muted);
@@ -542,33 +574,36 @@
       background: var(--surface);
     }
     .cta-box {
-      background: linear-gradient(135deg, var(--surface2) 0%, rgba(37,99,235,0.06) 100%);
+      background: linear-gradient(135deg, var(--surface2) 0%, rgba(37,99,235,0.07) 100%);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 4rem 3rem;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 3rem;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--teal));
     }
     .cta-text h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 0.75rem; }
-    .cta-text p { color: var(--muted); max-width: 480px; }
+    .cta-text p { color: var(--muted); max-width: 480px; line-height: 1.75; }
     .cta-actions {
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
       min-width: 200px;
     }
-    .cta-detail {
-      font-size: 0.82rem;
-      color: var(--muted);
-      text-align: center;
-    }
+    .cta-detail { font-size: 0.82rem; color: var(--muted); text-align: center; }
 
     /* ── CONTACT ── */
-    #contact {
-      padding: 7rem 0;
-    }
+    #contact { padding: 7rem 0; }
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -576,7 +611,7 @@
       align-items: start;
     }
     .contact-info h2 { margin-bottom: 0.75rem; }
-    .contact-info p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-info p { color: var(--muted); margin-bottom: 2rem; line-height: 1.75; }
     .contact-detail {
       display: flex;
       align-items: flex-start;
@@ -585,28 +620,34 @@
       border-bottom: 1px solid var(--border);
     }
     .contact-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
+      width: 40px; height: 40px;
+      border-radius: 9px;
       background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1rem;
       flex-shrink: 0;
     }
-    .contact-label { font-size: 0.78rem; color: var(--muted); }
-    .contact-value { font-weight: 500; font-size: 0.95rem; }
+    .contact-label { font-size: 0.75rem; color: var(--muted); }
+    .contact-value { font-weight: 600; font-size: 0.95rem; }
     .contact-form {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
     }
-    .contact-form h3 {
-      margin-bottom: 1.5rem;
-      font-size: 1.3rem;
+    .contact-form::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--teal));
     }
+    .contact-form h3 { margin-bottom: 1.5rem; font-size: 1.3rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
     .form-field { margin-bottom: 1rem; }
     .form-field label {
@@ -614,28 +655,30 @@
       font-size: 0.8rem;
       font-weight: 600;
       color: var(--muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.04em;
     }
     input, textarea, select {
       width: 100%;
       background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 0.75rem 1rem;
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
       color: var(--text);
       font-family: 'Heebo', sans-serif;
       font-size: 0.9rem;
-      transition: border-color 0.25s;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      outline: none;
     }
     input:focus, textarea:focus, select:focus {
-      outline: none;
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
     }
-    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.7; }
     textarea { min-height: 100px; resize: vertical; }
     .form-submit {
       width: 100%;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: white;
       border: none;
       padding: 0.9rem;
@@ -644,9 +687,9 @@
       font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.25s, transform 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .form-submit:hover { background: var(--accent2); transform: translateY(-1px); }
+    .form-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
 
     /* ── FOOTER ── */
     footer {
@@ -671,18 +714,14 @@
     .footer-brand .footer-logo span { color: var(--accent2); }
     .footer-brand p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
     .footer-col h4 {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted);
       margin-bottom: 1rem;
     }
-    .footer-col ul {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
     .footer-col ul li a {
       font-size: 0.88rem;
       color: var(--muted);
@@ -724,7 +763,7 @@
 </div>
 
 <!-- Nav -->
-<nav>
+<nav id="navbar">
   <div class="container nav-inner">
     <div class="nav-logo">
       כהן ושות׳ <span>|</span> רו"ח
@@ -767,15 +806,15 @@
         <a href="#services" class="btn btn-outline">השירותים שלנו</a>
       </div>
       <div class="hero-numbers">
-        <div class="hero-num-item">
+        <div>
           <div class="hero-num">500+</div>
           <div class="hero-num-label">לקוחות פעילים</div>
         </div>
-        <div class="hero-num-item">
+        <div>
           <div class="hero-num">18</div>
           <div class="hero-num-label">שנות פעילות</div>
         </div>
-        <div class="hero-num-item">
+        <div>
           <div class="hero-num">₪18M</div>
           <div class="hero-num-label">חיסכון ממוצע ללקוחות בשנה</div>
         </div>
@@ -787,42 +826,44 @@
 <!-- Services -->
 <section id="services">
   <div class="container">
-    <span class="section-label">מה אנחנו מציעים</span>
-    <h2 class="section-title">שירותים מקיפים לכל עסק</h2>
-    <p class="section-sub">מייעוץ מס ועד ניהול שוטף – פתרון 360° לכל הצרכים הפיננסיים שלך.</p>
-    <div class="blue-line"></div>
+    <div class="reveal">
+      <span class="section-label">מה אנחנו מציעים</span>
+      <h2 class="section-title">שירותים מקיפים לכל עסק</h2>
+      <p class="section-sub">מייעוץ מס ועד ניהול שוטף – פתרון 360° לכל הצרכים הפיננסיים שלך.</p>
+      <div class="blue-line"></div>
+    </div>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card reveal reveal-d1">
         <div class="service-icon">📋</div>
         <div class="service-name">ראיית חשבון ודוחות</div>
         <p class="service-desc">הכנת דוחות שנתיים, מאזנים וניתוחים פיננסיים בהתאם לתקנות ולדרישות הרשות.</p>
         <div class="service-tag">→ לחברות ועצמאים</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d2">
         <div class="service-icon">🧮</div>
         <div class="service-name">ייעוץ מס ותכנון</div>
         <p class="service-desc">תכנון מס חוקי שחוסך לך כסף. מס הכנסה, מע"מ, ביטוח לאומי ומיסוי מקרקעין.</p>
         <div class="service-tag">→ חיסכון ממוצע 23%</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d3">
         <div class="service-icon">📊</div>
         <div class="service-name">הנהלת חשבונות</div>
         <p class="service-desc">ניהול שוטף, רישום תנועות, דוחות מע"מ ופיקסום חשבונות – חודש אחר חודש.</p>
         <div class="service-tag">→ שירות חודשי קבוע</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d1">
         <div class="service-icon">🏢</div>
         <div class="service-name">הקמת חברות ועמותות</div>
         <p class="service-desc">פתיחת תיק עוסק, הקמת חברה בע"מ, עמותה ומסמכים להתנהלות עם רשויות.</p>
         <div class="service-tag">→ הכל תחת קורת גג אחת</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d2">
         <div class="service-icon">💼</div>
         <div class="service-name">ייעוץ פיננסי לעסקים</div>
         <p class="service-desc">תכנון תזרים מזומנים, ניתוח רווחיות, תמחיר ועזרה בקבלת החלטות כלכליות.</p>
         <div class="service-tag">→ לצמיחה ולהשקעה</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal reveal-d3">
         <div class="service-icon">🤝</div>
         <div class="service-name">ייצוג מול רשויות</div>
         <p class="service-desc">ייצוג מול רשות המסים, ביטוח לאומי ורשם החברות. אנחנו מטפלים, אתה שקט.</p>
@@ -836,11 +877,11 @@
 <section id="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text reveal">
         <span class="section-label">אודות המשרד</span>
         <h2 class="section-title">18 שנות מקצועיות – בשבילך</h2>
         <p class="section-sub">משרד כהן ושות׳ הוקם ב-2006 מתוך אמונה שכל לקוח ראוי ליחס אישי ולייעוץ שמותאם בדיוק לצרכיו.</p>
-        <p style="color: var(--muted); margin-bottom: 1.5rem; line-height: 1.75;">אנחנו לא "עוד משרד רו"ח". אנחנו שותפים אמיתיים להצלחה שלך – מלווים אותך מהיום הראשון ועד להצלחה. הגישה שלנו: שקיפות, זמינות ותוצאות מדידות.</p>
+        <p style="color: var(--muted); margin-bottom: 1.5rem; line-height: 1.8;">אנחנו לא "עוד משרד רו"ח". אנחנו שותפים אמיתיים להצלחה שלך – מלווים אותך מהיום הראשון ועד להצלחה. הגישה שלנו: שקיפות, זמינות ותוצאות מדידות.</p>
         <div class="about-highlights">
           <div class="highlight-card">
             <div class="highlight-num">500+</div>
@@ -861,7 +902,7 @@
         </div>
         <a href="#contact" class="btn btn-blue">קבע ייעוץ ראשוני חינם</a>
       </div>
-      <div class="team-section">
+      <div class="team-section reveal reveal-d2">
         <h3 style="margin-bottom:1.5rem; font-size:1.3rem;">הצוות שלנו</h3>
         <div class="team-grid">
           <div class="team-card">
@@ -897,39 +938,41 @@
 <!-- Industries -->
 <section id="industries">
   <div class="container">
-    <span class="section-label">תחומי התמחות</span>
-    <h2 class="section-title">אנחנו מכירים את התחום שלך</h2>
-    <p class="section-sub">ניסיון רב בענפים שונים מאפשר לנו לתת ייעוץ מותאם ומדויק.</p>
+    <div class="reveal">
+      <span class="section-label">תחומי התמחות</span>
+      <h2 class="section-title">אנחנו מכירים את התחום שלך</h2>
+      <p class="section-sub">ניסיון רב בענפים שונים מאפשר לנו לתת ייעוץ מותאם ומדויק.</p>
+    </div>
     <div class="industries-grid">
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d1">
         <div class="industry-icon">🏗️</div>
         <div class="industry-name">בנייה וקבלנות</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d2">
         <div class="industry-icon">🏥</div>
         <div class="industry-name">רפואה ובריאות</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d3">
         <div class="industry-icon">💻</div>
         <div class="industry-name">היי-טק וסטארטאפים</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d1">
         <div class="industry-icon">🍽️</div>
         <div class="industry-name">מסעדות ומזון</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d2">
         <div class="industry-icon">🏪</div>
         <div class="industry-name">מסחר וקמעונאות</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d3">
         <div class="industry-icon">🏠</div>
         <div class="industry-name">נדל"ן ומשקיעים</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d1">
         <div class="industry-icon">⚖️</div>
         <div class="industry-name">עורכי דין</div>
       </div>
-      <div class="industry-card">
+      <div class="industry-card reveal reveal-d2">
         <div class="industry-icon">🎓</div>
         <div class="industry-name">חינוך ועמותות</div>
       </div>
@@ -937,11 +980,11 @@
   </div>
 </section>
 
-<!-- Process -->
+<!-- Process & FAQ combined -->
 <section id="process">
   <div class="container">
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;">
-      <div>
+      <div class="reveal">
         <span class="section-label">תהליך העבודה</span>
         <h2 class="section-title">איך אנחנו עובדים</h2>
         <p class="section-sub">תהליך פשוט, שקוף ויעיל – מהפגישה הראשונה ועד לתוצאות.</p>
@@ -972,7 +1015,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="reveal reveal-d2">
         <span class="section-label">שאלות נפוצות</span>
         <h2 class="section-title" id="faq" style="margin-bottom:2rem;">שאלות שלקוחות שואלים</h2>
         <div class="faq-list">
@@ -990,7 +1033,7 @@
           </div>
           <div class="faq-item">
             <div class="faq-q">כמה זמן לוקח המעבר ממשרד אחר?</div>
-            <div class="faq-a">המעבר בדרך כלל אורך שבוע-שבועיים. אנחנו מטפלים בהעברת המסמכים וממשרד קודם ישירות – בלי להטריח אותך יותר מדי.</div>
+            <div class="faq-a">המעבר בדרך כלל אורך שבוע-שבועיים. אנחנו מטפלים בהעברת המסמכים ממשרד קודם ישירות – בלי להטריח אותך יותר מדי.</div>
           </div>
         </div>
       </div>
@@ -1001,14 +1044,14 @@
 <!-- CTA -->
 <section id="cta">
   <div class="container">
-    <div class="cta-box">
+    <div class="cta-box reveal">
       <div class="cta-text">
         <h2>מוכן/ה לסדר את הכספים?</h2>
         <p>ייעוץ ראשוני חינם וללא התחייבות. גלה/י כמה כסף אפשר לחסוך ואיך אנחנו יכולים לעזור לך לצמוח.</p>
       </div>
       <div class="cta-actions">
         <a href="#contact" class="btn btn-blue">קבע פגישה ראשונה</a>
-        <a href="tel:" class="btn btn-teal">📞 התקשרו אלינו</a>
+        <a href="#contact" class="btn btn-teal">📧 שלח הודעה</a>
         <p class="cta-detail">ייעוץ ראשוני ללא עלות</p>
       </div>
     </div>
@@ -1019,29 +1062,15 @@
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
-      <div class="contact-info">
+      <div class="contact-info reveal">
         <span class="section-label">צרו קשר</span>
         <h2 class="section-title">נשמח לדבר</h2>
         <p>צוות המשרד זמין לענות על כל שאלה ולקבוע פגישת היכרות ללא עלות.</p>
         <div class="contact-detail">
           <div class="contact-icon">📍</div>
           <div>
-            <div class="contact-label">כתובת</div>
-            <div class="contact-value">כתובת</div>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-icon">📞</div>
-          <div>
-            <div class="contact-label">טלפון</div>
-            <div class="contact-value">טלפון</div>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-icon">📧</div>
-          <div>
-            <div class="contact-label">אימייל</div>
-            <div class="contact-value">אימייל</div>
+            <div class="contact-label">כתובת המשרד</div>
+            <div class="contact-value">תל אביב</div>
           </div>
         </div>
         <div class="contact-detail">
@@ -1051,8 +1080,15 @@
             <div class="contact-value">א'-ה' 08:30–18:00</div>
           </div>
         </div>
+        <div class="contact-detail">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-label">ערוץ תקשורת</div>
+            <div class="contact-value">טופס יצירת קשר</div>
+          </div>
+        </div>
       </div>
-      <div class="contact-form">
+      <div class="contact-form reveal reveal-d2">
         <h3>השאר/י פרטים ונחזור תוך 24 שעות</h3>
         <form onsubmit="return false">
           <div class="form-row">
@@ -1061,13 +1097,13 @@
               <input type="text" placeholder="ישראל ישראלי">
             </div>
             <div class="form-field">
-              <label>טלפון</label>
-              <input type="tel" placeholder="050-000-0000">
+              <label>שם החברה / עסק</label>
+              <input type="text" placeholder="שם העסק">
             </div>
           </div>
           <div class="form-field">
             <label>אימייל</label>
-            <input type="email" placeholder="israel@example.com">
+            <input type="email" placeholder="your@email.com">
           </div>
           <div class="form-field">
             <label>סוג העסק / מה אתה מחפש?</label>
@@ -1110,22 +1146,33 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>צור קשר</h4>
+        <h4>ניווט</h4>
         <ul>
-          <li><a href="tel:">📞 טלפון</a></li>
-          <li><a href="mailto:">📧 אימייל</a></li>
-          <li><a href="#contact">🗓️ קבע פגישה</a></li>
+          <li><a href="#about">אודות המשרד</a></li>
+          <li><a href="#industries">תחומי התמחות</a></li>
+          <li><a href="#faq">שאלות נפוצות</a></li>
+          <li><a href="#contact">קבע פגישה</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2024 כהן ושות׳ רואי חשבון. כל הזכויות שמורות.</span>
+      <span>© 2025 כהן ושות׳ רואי חשבון. כל הזכויות שמורות.</span>
       <span><a href="Ori WebLab – סטודיו לפיתוח אתרים.html">בניית האתר: Ori WebLab</a></span>
     </div>
   </div>
 </footer>
 
 <script>
+// Navbar scroll
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 50));
+
+// Reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
 // ── כהן ושות׳: Data Network ──
 (function() {
   const canvas = document.getElementById('three-canvas');

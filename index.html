@@ -138,14 +138,13 @@
     }
 
     .btn-primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #1E90FF);
       color: #ffffff;
-      border-color: var(--accent);
+      border-color: transparent;
+      box-shadow: 0 4px 18px rgba(0,120,212,0.35);
     }
     .btn-primary:hover {
-      background: #1E90FF;
-      border-color: #1E90FF;
-      box-shadow: 0 0 28px rgba(0,120,212,0.45);
+      box-shadow: 0 8px 32px rgba(0,120,212,0.55);
       transform: translateY(-2px);
     }
 
@@ -166,10 +165,12 @@
       border-color: var(--accent);
       font-size: 0.88rem;
       padding: 0.55rem 1.2rem;
+      box-shadow: 0 0 12px rgba(0,120,212,0.15);
     }
     .btn-gold-outline:hover {
       background: var(--accent);
       color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,120,212,0.4);
     }
 
     /* ─── Navbar ───────────────────────────────────────────────────── */
@@ -181,11 +182,12 @@
       transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
     }
     #navbar.scrolled {
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       padding: 0.8rem 0;
       border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.6);
     }
 
     .nav-inner {
@@ -313,7 +315,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,120,212,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,120,212,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 10% 20%, rgba(0,120,212,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 50% 70% at 20% 80%, rgba(0,0,0,0.9) 0%, transparent 70%);
       z-index: 1;
     }
@@ -452,10 +455,21 @@
     }
     .service-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px var(--glow);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--glow);
       border-color: rgba(0,120,212,0.45);
     }
     .service-card:hover::before { opacity: 1; }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to left, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
 
     .service-icon {
       width: 52px;
@@ -581,7 +595,7 @@
     }
     .portfolio-card:hover .portfolio-overlay { opacity: 1; }
     .portfolio-overlay-btn {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #1E90FF);
       color: #ffffff;
       font-family: 'Heebo', sans-serif;
       font-weight: 700;
@@ -593,7 +607,7 @@
       gap: 0.5rem;
       transform: translateY(8px);
       transition: transform 0.35s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 20px rgba(0,120,212,0.35);
     }
     .portfolio-card:hover .portfolio-overlay-btn { transform: translateY(0); }
     .portfolio-info-tag {
@@ -858,11 +872,26 @@
       gap: 1rem;
       transition: var(--transition);
     }
+    .why-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to left, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.4s ease;
+    }
     .why-card:hover {
       border-color: rgba(0,120,212,0.45);
       transform: translateY(-4px);
       box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     }
+    .why-card:hover::before { transform: scaleX(1); }
 
     .why-check {
       width: 44px; height: 44px;
@@ -955,6 +984,15 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-form::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to left, transparent, var(--accent), #1E90FF, var(--accent), transparent);
     }
 
     .form-group {
@@ -1112,6 +1150,7 @@
       background: rgba(0,120,212,0.12);
       border-color: rgba(0,120,212,0.4);
       color: var(--accent);
+      box-shadow: 0 0 14px rgba(0,120,212,0.3);
     }
 
     /* ─── Decorative divider ───────────────────────────────────────── */
@@ -1129,19 +1168,19 @@
       left: 1.5rem;
       width: 44px; height: 44px;
       border-radius: 50%;
-      background: var(--accent);
-      color: var(--bg);
+      background: linear-gradient(135deg, var(--accent), #1E90FF);
+      color: #fff;
       display: none;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       border: none;
       font-size: 1.1rem;
-      box-shadow: 0 4px 24px rgba(0,120,212,0.4);
+      box-shadow: 0 4px 24px rgba(0,120,212,0.45);
       transition: var(--transition);
       z-index: 500;
     }
-    #scroll-top:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,120,212,0.5); }
+    #scroll-top:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,120,212,0.6); }
     #scroll-top.show { display: flex; }
 
     /* ─── Responsive ───────────────────────────────────────────────── */
@@ -1219,6 +1258,24 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to left, transparent, var(--accent), #1E90FF, var(--accent), transparent);
+    }
+    #cta-banner::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 600px; height: 300px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(0,120,212,0.07) 0%, transparent 70%);
+      pointer-events: none;
     }
     .cta-banner-title {
       font-family: 'Frank Ruhl Libre', serif;
@@ -1263,11 +1320,26 @@
       gap: 1.25rem;
       transition: var(--transition);
     }
+    .testimonial-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to left, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.4s ease;
+    }
     .testimonial-card:hover {
       border-color: rgba(0,120,212,0.45);
       transform: translateY(-4px);
       box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     }
+    .testimonial-card:hover::before { transform: scaleX(1); }
     .testimonial-stars {
       color: var(--accent);
       font-size: 1rem;
@@ -1737,7 +1809,7 @@
 
 <!-- ─── CTA Banner ────────────────────────────────────────────────── -->
 <section id="cta-banner" aria-label="קריאה לפעולה">
-  <div class="container reveal" style="text-align:center;">
+  <div class="container reveal" style="text-align:center; position:relative; z-index:1;">
     <p class="cta-banner-title">מוכן להתחיל?</p>
     <p class="cta-banner-sub">בואו נדבר על הפרויקט שלך – ללא עלות וללא התחייבות</p>
     <a href="#contact" class="btn btn-primary" style="font-size:1.05rem; padding:0.9rem 2.5rem;">
